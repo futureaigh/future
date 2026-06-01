@@ -1,0 +1,211 @@
+{
+  "entities": {
+    "siteSettings": {
+      "title": "Site Settings",
+      "description": "Global settings for the brand and website.",
+      "type": "object",
+      "properties": {
+        "brandName": { "type": "string" },
+        "slogan": { "type": "string" },
+        "logoMain": { "type": "string" },
+        "logoAlt": { "type": "string" },
+        "favicon": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "secondaryColor": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "socialLinks": {
+          "type": "object",
+          "properties": {
+            "facebook": { "type": "string" },
+            "twitter": { "type": "string" },
+            "instagram": { "type": "string" },
+            "linkedin": { "type": "string" }
+          }
+        },
+        "ga4Id": { "type": "string" }
+      }
+    },
+    "page": {
+      "title": "Page",
+      "description": "Structure for individual website pages.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "seo": {
+          "type": "object",
+          "properties": {
+            "metaTitle": { "type": "string" },
+            "metaDescription": { "type": "string" },
+            "ogImage": { "type": "string" },
+            "noIndex": { "type": "boolean" }
+          }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "section": {
+      "title": "Section",
+      "description": "Modular blocks for page content.",
+      "type": "object",
+      "properties": {
+        "pageId": { "type": "string" },
+        "type": { "type": "string", "enum": ["hero", "why-future", "products-preview", "services", "training", "economy", "choose-us", "testimonials", "cta", "text-image"] },
+        "order": { "type": "number" },
+        "content": { "type": "object" },
+        "isVisible": { "type": "boolean" }
+      }
+    },
+    "product": {
+      "title": "Product",
+      "description": "Future brand products.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "description": { "type": "string" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "targetAudience": { "type": "string" },
+        "image": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "hidden"] },
+        "order": { "type": "number" }
+      }
+    },
+    "service": {
+      "title": "Service",
+      "description": "Future brand services.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "outcome": { "type": "string" },
+        "image": { "type": "string" },
+        "icon": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "hidden"] },
+        "order": { "type": "number" }
+      }
+    },
+    "training": {
+      "title": "Training",
+      "description": "AI and tech training programs.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" },
+        "format": { "type": "string" },
+        "outcome": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "hidden"] },
+        "order": { "type": "number" }
+      }
+    },
+    "testimonial": {
+      "title": "Testimonial",
+      "description": "Customer feedback.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "content": { "type": "string" },
+        "photo": { "type": "string" },
+        "isVisible": { "type": "boolean" },
+        "order": { "type": "number" }
+      }
+    },
+    "submission": {
+      "title": "Submission",
+      "description": "Captured lead from forms.",
+      "type": "object",
+      "properties": {
+        "formType": { "type": "string", "enum": ["contact", "consultation", "training", "waitlist"] },
+        "data": { "type": "object" },
+        "status": { "type": "string", "enum": ["new", "contacted", "closed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "mediaItem": {
+      "title": "Media Item",
+      "description": "Uploaded images and assets.",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "name": { "type": "string" },
+        "altText": { "type": "string" },
+        "category": { "type": "string" },
+        "uploadedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "navLink": {
+      "title": "Nav Link",
+      "description": "Navigation menu items.",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "path": { "type": "string" },
+        "order": { "type": "number" },
+        "location": { "type": "string", "enum": ["header", "footer"] },
+        "isCTA": { "type": "boolean" },
+        "isVisible": { "type": "boolean" }
+      }
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "Basic site visit analytics.",
+      "type": "object",
+      "properties": {
+        "pageViews": { "type": "number" },
+        "uniqueVisitors": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "settings/global": {
+      "schema": "siteSettings",
+      "description": "Global site settings."
+    },
+    "pages/{pageId}": {
+      "schema": "page",
+      "description": "Collection of site pages."
+    },
+    "sections/{sectionId}": {
+      "schema": "section",
+      "description": "Modular sections assigned to pages."
+    },
+    "products/{productId}": {
+      "schema": "product",
+      "description": "Core products."
+    },
+    "services/{serviceId}": {
+      "schema": "service",
+      "description": "Business services."
+    },
+    "training/{trainingId}": {
+      "schema": "training",
+      "description": "Training programs."
+    },
+    "testimonials/{testimonialId}": {
+      "schema": "testimonial",
+      "description": "Client testimonials."
+    },
+    "submissions/{submissionId}": {
+      "schema": "submission",
+      "description": "Form submissions and leads."
+    },
+    "media/{mediaId}": {
+      "schema": "mediaItem",
+      "description": "Media library assets."
+    },
+    "navigation/{navId}": {
+      "schema": "navLink",
+      "description": "Site navigation items."
+    },
+    "analytics/site": {
+      "schema": "analytics",
+      "description": "Site-wide analytics data."
+    }
+  }
+}

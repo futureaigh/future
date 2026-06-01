@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-navy: #131B3D;
+  --color-brand-gold: #F59E0B;
+  --color-brand-gold-muted: rgba(245, 158, 11, 0.1);
+  --color-brand-navy-light: #1E293B;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-brand-navy antialiased font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
+  }
+  .glass-dark {
+    @apply bg-brand-navy/80 backdrop-blur-lg border border-white/10;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.section-padding {
+  @apply py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto w-full;
+}
+
+.btn-primary {
+  @apply bg-brand-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-navy/90 transition-all active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-secondary {
+  @apply border-2 border-brand-navy text-brand-navy px-8 py-3 rounded-lg font-semibold hover:bg-brand-navy/5 transition-all active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-gold {
+  @apply bg-brand-gold text-brand-navy px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold/90 transition-all active:scale-95 flex items-center justify-center gap-2;
+}
+
