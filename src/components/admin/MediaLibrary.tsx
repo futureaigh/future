@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, serverTimestamp } from '../../firebase';
 import { MediaItem } from '../../types';
 import { Plus, Trash2, Search, Image as ImageIcon, Upload, X, Copy, Check } from 'lucide-react';
 

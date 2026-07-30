@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from '../../firebase';
 import { Submission } from '../../types';
 import { Mail, Clock, CheckCircle2, Trash2, Filter, Search, Download } from 'lucide-react';
 

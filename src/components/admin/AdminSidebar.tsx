@@ -14,7 +14,9 @@ import {
   Mail, 
   Shield,
   LayoutDashboard,
-  ExternalLink
+  ExternalLink,
+  UserCheck,
+  Package
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
@@ -26,6 +28,8 @@ export const AdminSidebar: React.FC = () => {
     { to: '/admin/studio', icon: <ImageIcon size={20} />, label: 'FUTURE STUDIO' },
     { to: '/admin/skills', icon: <GraduationCap size={20} />, label: 'FUTURE SKILLS' },
     { to: '/admin/labs', icon: <ShoppingBag size={20} />, label: 'FUTURE LABS' },
+    { to: '/admin/products', icon: <Package size={20} />, label: 'Products' },
+    { to: '/admin/team', icon: <UserCheck size={20} />, label: 'Team Members' },
     { to: '/admin/testimonials', icon: <Quote size={20} />, label: 'Testimonials' },
     { to: '/admin/media', icon: <ImageIcon size={20} />, label: 'Media Library' },
     { to: '/admin/navigation', icon: <Navigation size={20} />, label: 'Navigation' },

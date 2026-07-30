@@ -151,6 +151,22 @@
         "isVisible": { "type": "boolean" }
       }
     },
+    "teamMember": {
+      "title": "Team Member",
+      "description": "Team member profile details and photo.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "position": { "type": "string" },
+        "bio": { "type": "string" },
+        "photo": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "twitter": { "type": "string" },
+        "email": { "type": "string" },
+        "order": { "type": "number" },
+        "isVisible": { "type": "boolean" }
+      }
+    },
     "analytics": {
       "title": "Analytics",
       "description": "Basic site visit analytics.",
@@ -206,6 +222,10 @@
     "analytics/site": {
       "schema": "analytics",
       "description": "Site-wide analytics data."
+    },
+    "team/{memberId}": {
+      "schema": "teamMember",
+      "description": "Team members collection."
     }
   }
 }

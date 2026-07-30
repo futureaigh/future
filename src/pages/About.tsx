@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { CheckCircle2, Target, Lightbulb, Users } from 'lucide-react';
 import { usePage } from '../hooks/usePage';
+import { TeamSection } from '../components/TeamSection';
 
 const About = () => {
   const { page, loading } = usePage('about');
@@ -74,6 +75,8 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <TeamSection />
     </div>
   );
 };

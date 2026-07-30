@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc, increment, serverTimestamp } from 'firebase/firestore';
-import { auth, db } from './firebase';
+import { auth, db, doc, getDoc, setDoc, increment, serverTimestamp, onAuthStateChanged } from './firebase';
 import { Layout } from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -11,6 +9,7 @@ import Studio from './pages/Studio';
 import Skills from './pages/Skills';
 import Labs from './pages/Labs';
 import Contact from './pages/Contact';
+import Team from './pages/Team';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { Login } from './pages/Login';
 
@@ -78,6 +77,7 @@ export default function App() {
         { title: 'Skills', slug: 'skills' },
         { title: 'Labs', slug: 'labs' },
         { title: 'About', slug: 'about' },
+        { title: 'Team', slug: 'team' },
         { title: 'Contact', slug: 'contact' }
       ];
 
@@ -110,8 +110,8 @@ export default function App() {
         const snap = await getDoc(settingsRef);
         if (snap.exists()) {
           const data = snap.data();
-          if (data.slogan === 'The Future. Simplified.') {
-            await setDoc(settingsRef, { slogan: 'solutions. simplified.' }, { merge: true });
+          if (data.slogan === 'The Future. Simplified.' || data.slogan === 'solutions. simplified.' || data.slogan === 'solutions. simplified') {
+            await setDoc(settingsRef, { slogan: 'simplified AI solutions for Africa' }, { merge: true });
           }
         }
       }
@@ -137,9 +137,13 @@ export default function App() {
           <Route path="studio" element={<Studio />} />
           <Route path="skills" element={<Skills />} />
           <Route path="labs" element={<Labs />} />
+          <Route path="products" element={<Navigate to="/labs" replace />} />
+          <Route path="products/:id" element={<Navigate to="/labs" replace />} />
           <Route path="about" element={<About />} />
+          <Route path="team" element={<Team />} />
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login user={user} isAdmin={isAdmin} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
         <Route 
           path="/admin/*" 

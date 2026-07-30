@@ -7,6 +7,7 @@ import { PageManager } from '../components/admin/PageManager';
 import { ProductManager } from '../components/admin/ProductManager';
 import { ServiceManager } from '../components/admin/ServiceManager';
 import { TrainingManager } from '../components/admin/TrainingManager';
+import { TeamManager } from '../components/admin/TeamManager';
 import { TestimonialManager } from '../components/admin/TestimonialManager';
 import { MediaLibrary } from '../components/admin/MediaLibrary';
 import { NavManager } from '../components/admin/NavManager';
@@ -27,8 +28,17 @@ export const AdminDashboard: React.FC = () => {
           <Route path="/work" element={<ServiceManager category="work" />} />
           <Route path="/studio" element={<ServiceManager category="studio" />} />
           <Route path="/skills" element={<ServiceManager category="skills" />} />
-          <Route path="/labs" element={<ServiceManager category="labs" />} />
+          <Route path="/labs" element={
+            <div className="space-y-12">
+              <ProductManager />
+              <div className="pt-8 border-t border-white/10">
+                <ServiceManager category="labs" />
+              </div>
+            </div>
+          } />
+          <Route path="/products" element={<ProductManager />} />
           <Route path="/testimonials" element={<TestimonialManager />} />
+          <Route path="/team" element={<TeamManager />} />
           <Route path="/media" element={<MediaLibrary />} />
           <Route path="/navigation" element={<NavManager />} />
           <Route path="/leads" element={<SubmissionManager />} />

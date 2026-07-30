@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, onSnapshot, doc, setDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, onSnapshot, doc, setDoc, deleteDoc } from '../../firebase';
 import { UserProfile } from '../../types';
 import { Shield, Plus, Trash2, User as UserIcon, ShieldCheck, Mail, ShieldAlert } from 'lucide-react';
 

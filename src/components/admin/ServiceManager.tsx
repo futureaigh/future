@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, where } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, where } from '../../firebase';
 import { Service } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Trash2, Edit2, Briefcase, Save, X, Lightbulb, CheckCircle, Smartphone, Globe, MessageSquare, Zap, Upload, Image as ImageIcon, Video, Palette, Bot } from 'lucide-react';

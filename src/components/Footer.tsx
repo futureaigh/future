@@ -25,11 +25,22 @@ export const Footer = () => {
             )}
           </Link>
           <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            {settings?.slogan || 'Making AI and modern technology simple, practical, affordable, and accessible for African businesses and individuals.'}
+            {settings?.slogan || 'simplified AI solutions for Africa'}
           </p>
-          <div className="flex gap-4">
-            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-              <a key={i} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-all">
+          <div className="flex flex-wrap gap-3">
+            {[
+              { Icon: Facebook, url: settings?.socialLinks?.facebook },
+              { Icon: Twitter, url: settings?.socialLinks?.twitter },
+              { Icon: Instagram, url: settings?.socialLinks?.instagram },
+              { Icon: Linkedin, url: settings?.socialLinks?.linkedin },
+            ].map(({ Icon, url }, i) => (
+              <a 
+                key={i} 
+                href={url || '#'} 
+                target={url ? "_blank" : undefined}
+                rel={url ? "noopener noreferrer" : undefined}
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-all"
+              >
                 <Icon size={18} />
               </a>
             ))}
@@ -66,17 +77,19 @@ export const Footer = () => {
           <h4 className="font-display font-bold text-lg mb-6">Contact</h4>
           <ul className="space-y-4 text-sm text-gray-400">
             <li className="flex items-start gap-3">
-              <MapPin size={18} className="text-brand-gold shrink-0" />
-              <span>Accra, Ghana</span>
+              <MapPin size={18} className="text-brand-gold shrink-0 mt-0.5" />
+              <span>{settings?.contactAddress || 'Accra, Ghana'}</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-brand-gold shrink-0" />
-              <a href="tel:+233243005804" className="hover:text-brand-gold transition-colors">+233 24 300 5804</a>
+              <a href={`tel:${settings?.contactPhone || '+233 20 000 0000'}`} className="hover:text-brand-gold transition-colors">
+                {settings?.contactPhone || '+233 20 000 0000'}
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <MessageCircle size={18} className="text-green-400 shrink-0" />
               <a 
-                href="https://wa.me/233243005804" 
+                href={`https://wa.me/${(settings?.whatsappNumber || settings?.contactPhone || '233200000000').replace(/[\+\s\-\(\)]/g, '')}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-green-400 transition-colors"
@@ -86,14 +99,24 @@ export const Footer = () => {
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-brand-gold shrink-0" />
-              <span>futureaigh@gmail.com</span>
+              <a href={`mailto:${settings?.contactEmail || 'futureaigh@gmail.com'}`} className="hover:text-brand-gold transition-colors">
+                {settings?.contactEmail || 'futureaigh@gmail.com'}
+              </a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-20 pt-8 border-t border-white/5 text-center text-xs text-gray-500">
-        <p>&copy; {new Date().getFullYear()} {settings?.brandName || 'Future'}. All Rights Reserved. {settings?.slogan || 'solutions. simplified.'}</p>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-20 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <p>&copy; {new Date().getFullYear()} {settings?.brandName || 'Future'}. All Rights Reserved. {settings?.slogan || 'simplified AI solutions for Africa'}</p>
+        <Link 
+          to="/admin" 
+          className="text-gray-600 hover:text-brand-gold/70 transition-colors inline-flex items-center gap-1.5 opacity-60 hover:opacity-100"
+          title="Admin Portal"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-gold/40"></span>
+          <span>Admin</span>
+        </Link>
       </div>
     </footer>
   );

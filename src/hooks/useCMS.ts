@@ -19,5 +19,18 @@ export const useCMS = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (settings?.favicon || settings?.logoMain) {
+      const faviconUrl = settings.favicon || settings.logoMain;
+      let link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = faviconUrl;
+    }
+  }, [settings]);
+
   return { settings, headerLinks, footerLinks };
 };

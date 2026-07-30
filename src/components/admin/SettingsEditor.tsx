@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, doc, getDoc, setDoc } from '../../firebase';
 import { SiteSettings } from '../../types';
 import { motion } from 'motion/react';
 import { Save, Image as ImageIcon, Upload, Globe, MessageCircle, Phone, Mail, Layout, Palette } from 'lucide-react';

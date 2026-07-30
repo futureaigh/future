@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider, signInWithPopup, GoogleAuthProvider } from '../firebase';
 import { Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { LogIn, ShieldAlert } from 'lucide-react';

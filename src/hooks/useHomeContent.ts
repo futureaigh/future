@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { onSnapshot, collection, query, where, orderBy, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, onSnapshot, collection, query, where, orderBy, doc } from '../firebase';
 import { Page, Product, Service, Testimonial } from '../types';
 
 export const useHomeContent = () => {

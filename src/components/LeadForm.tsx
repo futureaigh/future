@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, collection, addDoc, serverTimestamp } from '../firebase';
 import { motion } from 'motion/react';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Mail } from 'lucide-react';
 
 interface LeadFormData {
   name: string;
@@ -16,16 +15,19 @@ export const LeadForm: React.FC = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<LeadFormData>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [lastSubmission, setLastSubmission] = useState<LeadFormData | null>(null);
 
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true);
     try {
       await addDoc(collection(db, 'submissions'), {
         data: { ...data },
-        formType: 'contact',
+        recipientEmail: 'futureaigh@gmail.com',
+        formType: 'strategy_request',
         status: 'new',
         createdAt: serverTimestamp()
       });
+      setLastSubmission(data);
       setIsSuccess(true);
       reset();
     } catch (e) {
@@ -33,6 +35,13 @@ export const LeadForm: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleOpenMailClient = () => {
+    if (!lastSubmission) return;
+    const subject = encodeURIComponent(`Strategy Request from ${lastSubmission.name} (${lastSubmission.company || 'Individual'})`);
+    const body = encodeURIComponent(`Name: ${lastSubmission.name}\nEmail: ${lastSubmission.email}\nCompany: ${lastSubmission.company || 'N/A'}\n\nMessage:\n${lastSubmission.message}`);
+    window.open(`mailto:futureaigh@gmail.com?subject=${subject}&body=${body}`, '_blank');
   };
 
   if (isSuccess) {
@@ -43,14 +52,24 @@ export const LeadForm: React.FC = () => {
         className="text-center py-10"
       >
         <CheckCircle className="mx-auto text-brand-green mb-4" size={64} />
-        <h3 className="text-2xl font-bold mb-2">Message Received!</h3>
-        <p className="text-gray-400">Our team will be in touch within 24 hours.</p>
-        <button 
-          onClick={() => setIsSuccess(false)}
-          className="mt-6 text-brand-yellow hover:underline"
-        >
-          Send another message
-        </button>
+        <h3 className="text-2xl font-bold mb-2 text-white">Message Received!</h3>
+        <p className="text-gray-400 max-w-md mx-auto mb-6">Your submission has been sent directly to <strong className="text-brand-gold font-mono">futureaigh@gmail.com</strong>. Our team will be in touch within 24 hours.</p>
+        
+        <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
+          <button 
+            onClick={handleOpenMailClient}
+            className="flex items-center gap-2 px-6 py-3 bg-brand-gold text-brand-navy rounded-xl font-bold hover:bg-yellow-400 transition-all text-sm"
+          >
+            <Mail size={18} />
+            Open in Email App
+          </button>
+          <button 
+            onClick={() => setIsSuccess(false)}
+            className="text-gray-400 hover:text-white text-sm underline"
+          >
+            Send another message
+          </button>
+        </div>
       </motion.div>
     );
   }

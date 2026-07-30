@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc } from '../../firebase';
 import { Product } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Trash2, Edit2, ShoppingBag, Save, X, Upload, Image as ImageIcon } from 'lucide-react';

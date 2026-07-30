@@ -1,5 +1,4 @@
-import { collection, doc, getDoc, onSnapshot, query, orderBy, where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, collection, doc, getDoc, onSnapshot, query, orderBy, where, getDocs } from '../firebase';
 import { SiteSettings, NavLink, Page, Testimonial, Product, Service, TrainingProgram } from '../types';
 
 export const getSiteSettings = (callback: (settings: SiteSettings) => void) => {

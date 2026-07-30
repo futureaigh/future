@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Globe, Cpu, Database, UserCheck, Repeat, Bot, Headset, Construction, CheckCircle2, ArrowRight, Lightbulb, Zap, Smartphone, MessageSquare, ShieldCheck, Settings, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { collection, query, orderBy, onSnapshot, where } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, collection, query, orderBy, onSnapshot, where } from '../firebase';
 import { usePage } from '../hooks/usePage';
 import { Service } from '../types';
 

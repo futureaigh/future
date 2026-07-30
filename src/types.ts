@@ -9,6 +9,9 @@ export interface SiteSettings {
   contactEmail?: string;
   contactPhone?: string;
   whatsappNumber?: string;
+  contactAddress?: string;
+  contactHours?: string;
+  mapEmbed?: string;
   headingFont?: string;
   bodyFont?: string;
   socialLinks?: {
@@ -16,6 +19,8 @@ export interface SiteSettings {
     twitter?: string;
     instagram?: string;
     linkedin?: string;
+    youtube?: string;
+    tiktok?: string;
   };
   ga4Id?: string;
 }
@@ -52,6 +57,8 @@ export interface Product {
   features: string[];
   targetAudience: string;
   image?: string;
+  accessUrl?: string;
+  demoUrl?: string;
   status: 'active' | 'hidden';
   order: number;
 }
@@ -87,6 +94,19 @@ export interface Testimonial {
   photo?: string;
   isVisible: boolean;
   order: number;
+}
+
+export interface TeamMember {
+  id?: string;
+  name: string;
+  position: string;
+  bio: string;
+  photo?: string;
+  linkedin?: string;
+  twitter?: string;
+  email?: string;
+  order: number;
+  isVisible: boolean;
 }
 
 export interface Submission {

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Video, Layers, Wand2, Palette, Share2, FileVideo, Camera, Scissors, CheckCircle2, ArrowRight, Briefcase, Zap, Smartphone, Globe, MessageSquare, ShieldCheck, Settings, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { collection, query, orderBy, onSnapshot, where } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, collection, query, orderBy, onSnapshot, where } from '../firebase';
 import { usePage } from '../hooks/usePage';
 import { Service } from '../types';
 

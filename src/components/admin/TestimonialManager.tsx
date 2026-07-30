@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc } from '../../firebase';
 import { Testimonial } from '../../types';
 import { Plus, Trash2, Edit2, Quote, Save, User as UserIcon, Eye, EyeOff } from 'lucide-react';
 

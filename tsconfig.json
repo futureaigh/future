@@ -18,18 +18,10 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "firebase/app": [
-        "./src/mocks/firebase/app.ts"
-      ],
-      "firebase/auth": [
-        "./src/mocks/firebase/auth.ts"
-      ],
-      "firebase/firestore": [
-        "./src/mocks/firebase/firestore.ts"
       ]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": ["future.zip - 30 July 2026"]
 }

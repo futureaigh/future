@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Layout, CreditCard, Send, Bot, Rocket, ShieldCheck, Globe, Zap, CheckCircle2, ArrowRight, Video, FileVideo, Palette, Briefcase, Smartphone, MessageSquare, Settings } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { collection, query, orderBy, onSnapshot, where } from 'firebase/firestore';
-import { db } from '../firebase';
+import { Layout, CreditCard, Send, Bot, Rocket, ShieldCheck, Globe, Zap, CheckCircle2, ArrowRight, Video, FileVideo, Palette, Briefcase, Smartphone, MessageSquare, Settings, Cpu, ExternalLink } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { db, collection, query, orderBy, onSnapshot, where } from '../firebase';
 import { usePage } from '../hooks/usePage';
-import { Service } from '../types';
+import { Service, Product } from '../types';
 
 const iconMap: Record<string, any> = {
   Layout, CreditCard, Send, Bot, Rocket, ShieldCheck, Globe, Zap, Video, FileVideo, Palette, Briefcase, Smartphone, MessageSquare, Settings
@@ -14,17 +13,41 @@ const iconMap: Record<string, any> = {
 const Labs = () => {
   const { page, loading: pageLoading } = usePage('labs');
   const [services, setServices] = useState<Service[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const content = page?.content || {};
 
   useEffect(() => {
-    const q = query(collection(db, 'services'), where('category', '==', 'labs'), orderBy('order', 'asc'));
-    const unsubscribe = onSnapshot(q, (snap) => {
+    const qServices = query(collection(db, 'services'), where('category', '==', 'labs'), orderBy('order', 'asc'));
+    const unsubServices = onSnapshot(qServices, (snap) => {
       setServices(snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Service)));
+    });
+
+    const qProducts = query(collection(db, 'products'), orderBy('order', 'asc'));
+    const unsubProducts = onSnapshot(qProducts, (snap) => {
+      setProducts(snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Product)));
       setLoading(false);
     });
-    return unsubscribe;
+
+    return () => {
+      unsubServices();
+      unsubProducts();
+    };
   }, []);
+
+  // Handle hash scrolling for product links like /labs#izypost
+  useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.replace('#', '').toLowerCase();
+      setTimeout(() => {
+        const elem = document.getElementById(targetId) || document.getElementById(`prod-${targetId}`);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
+  }, [location.hash, loading]);
 
   const defaultServices = [
     { title: 'AI Apps', icon: 'Bot' },
@@ -35,7 +58,14 @@ const Labs = () => {
     { title: 'White-label Platforms', icon: 'ShieldCheck' },
   ];
 
+  const defaultFeaturedProducts = [
+    { id: 'izyflow', name: 'IzyFlow', tagline: 'Smart Invoicing & Business Management', description: 'Simplified invoicing, expense tracking and inventory management for modern businesses.', image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80', accessUrl: 'https://myizyflow.com/', demoUrl: '/contact' },
+    { id: 'izypost', name: 'IzyPost', tagline: 'AI Social Media Management', description: 'Plan, create and schedule social media content with AI-driven insights.', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' },
+    { id: 'izycard', name: 'IzyCard', tagline: 'Smart Business Identification', description: 'Professional digital business cards that sync instantly with contacts.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' }
+  ];
+
   const displayServices = services.length > 0 ? services : defaultServices;
+  const displayProducts = products.length > 0 ? products : defaultFeaturedProducts;
 
   if (pageLoading || loading) return <div className="min-h-screen flex items-center justify-center bg-brand-navy"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-brand-gold"></div></div>;
 
@@ -66,14 +96,14 @@ const Labs = () => {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
-            {content.heroSubtext || 'Solivng African business problems through scalable digital products and innovative experiments.'}
+            {content.heroSubtext || 'Solving African business problems through scalable digital products and innovative experiments.'}
           </motion.p>
         </div>
       </section>
 
       {/* Experiment Grid */}
       <section className="section-padding py-24 bg-gray-50">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {displayServices.map((service, i) => {
             const IconComp = iconMap[service.icon] || Rocket;
             return (
@@ -104,39 +134,96 @@ const Labs = () => {
         </div>
       </section>
 
-      {/* Products Showcase (reusing logic from products) */}
+      {/* Products Showcase */}
       <section className="section-padding py-24">
          <div className="text-center mb-20">
             <h2 className="text-5xl font-bold text-brand-navy tracking-tighter">Featured Labs Products</h2>
             <div className="w-24 h-1 bg-brand-gold mx-auto mt-6"></div>
          </div>
          <div className="space-y-24">
-            {[
-               { id: 'izyflow', name: 'IzyFlow', slogan: 'Smart Invoicing & Business Management', icon: Layout, desc: 'Simplified invoicing, expense tracking, and inventory management for modern businesses.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800' },
-               { id: 'izypost', name: 'IzyPost', slogan: 'AI Social Media Management', icon: Send, desc: 'Plan, create, and schedule social media content with AI-driven insights.', image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800' },
-               { id: 'izycard', name: 'IzyCard', slogan: 'Smart Business Identification', icon: CreditCard, desc: 'Professional digital business cards that sync instantly with contacts.', image: 'https://images.unsplash.com/photo-1648260295976-de09f77ab469?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }
-            ].map((product, i) => (
-               <div key={product.id} className={`flex flex-col lg:flex-row gap-16 items-center ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className="lg:w-1/2">
-                     <h2 className="text-4xl font-bold mb-4 tracking-tight">{product.name}</h2>
-                     <p className="text-xl text-gray-500 mb-8">{product.slogan}</p>
-                     <p className="text-gray-600 mb-10 leading-relaxed font-medium">
-                        {product.desc}
-                     </p>
-                     <Link to="/contact" className="btn-primary px-10">Learn More About {product.name}</Link>
-                  </div>
-                  <div className="lg:w-1/2 w-full">
-                     <div className="aspect-video bg-gray-100 rounded-[3rem] overflow-hidden shadow-2xl relative border border-gray-100">
-                        <img 
-                           src={product.image} 
-                           alt={product.name} 
-                           className="w-full h-full object-cover"
-                           referrerPolicy="no-referrer"
-                        />
+            {displayProducts.map((product, i) => {
+               const elemId = (product.id || product.name?.toLowerCase().replace(/\s+/g, '') || `prod-${i}`).toLowerCase();
+               const nameSlug = product.name?.toLowerCase().replace(/\s+/g, '');
+               const imageUrl = product.image || `https://picsum.photos/seed/${elemId}/1200/800`;
+               return (
+                  <div 
+                     key={product.id || i} 
+                     id={elemId}
+                     data-slug={nameSlug}
+                     className={`flex flex-col lg:flex-row gap-16 items-center scroll-mt-32 ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
+                  >
+                     <div className="lg:w-1/2">
+                        <span className="text-brand-gold font-bold uppercase tracking-widest text-xs mb-2 block">
+                           {product.tagline || 'AI Ecosystem Product'}
+                        </span>
+                        <h2 className="text-4xl font-bold mb-4 tracking-tight text-brand-navy">{product.name}</h2>
+                        <p className="text-gray-600 mb-8 leading-relaxed font-medium text-lg">
+                           {product.description}
+                        </p>
+                        {product.features && product.features.length > 0 && (
+                           <div className="grid grid-cols-2 gap-3 mb-8">
+                              {product.features.map((f, fIdx) => (
+                                 <div key={fIdx} className="flex items-center gap-2 text-sm text-gray-600 font-semibold">
+                                    <CheckCircle2 size={16} className="text-brand-gold shrink-0" />
+                                    <span>{f}</span>
+                                 </div>
+                              ))}
+                           </div>
+                        )}
+                        <div className="flex flex-wrap gap-4">
+                           {product.accessUrl && (product.accessUrl.startsWith('http://') || product.accessUrl.startsWith('https://')) ? (
+                              <a 
+                                 href={product.accessUrl} 
+                                 target="_blank" 
+                                 rel="noopener noreferrer" 
+                                 className="btn-primary px-8 py-3 text-sm inline-flex items-center gap-2"
+                              >
+                                 Get Access to {product.name}
+                                 <ExternalLink size={16} />
+                              </a>
+                           ) : (
+                              <Link 
+                                 to={product.accessUrl || "/contact"} 
+                                 className="btn-primary px-8 py-3 text-sm"
+                              >
+                                 Get Access to {product.name}
+                              </Link>
+                           )}
+
+                           {product.demoUrl && (product.demoUrl.startsWith('http://') || product.demoUrl.startsWith('https://')) ? (
+                              <a 
+                                 href={product.demoUrl} 
+                                 target="_blank" 
+                                 rel="noopener noreferrer" 
+                                 className="btn-gold px-8 py-3 text-sm inline-flex items-center gap-2"
+                              >
+                                 Request Demo
+                                 <ExternalLink size={16} />
+                              </a>
+                           ) : (
+                              <Link 
+                                 to={product.demoUrl || "/contact"} 
+                                 className="btn-gold px-8 py-3 text-sm"
+                              >
+                                 Request Demo
+                              </Link>
+                           )}
+                        </div>
+                     </div>
+                     <div className="lg:w-1/2 w-full">
+                        <div className="aspect-video bg-gray-100 rounded-[3rem] overflow-hidden shadow-2xl relative border border-gray-100 group">
+                           <img 
+                              src={imageUrl} 
+                              alt={product.name} 
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              referrerPolicy="no-referrer"
+                           />
+                           <div className="absolute inset-0 bg-brand-navy/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
                      </div>
                   </div>
-               </div>
-            ))}
+               );
+            })}
          </div>
       </section>
 
@@ -178,10 +265,10 @@ const Labs = () => {
       {/* CTA */}
       <section className="py-24">
         <div className="section-padding text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-brand-navy mb-8 tracking-tighter">Invest in the Future</h2>
+          <h2 className="text-4xl md:text-6xl font-bold text-brand-navy mb-8 tracking-tighter">{content.ctaHeading || 'Invest in the Future'}</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-primary px-12 py-4 text-lg">
-               Partner with Labs
+               {content.ctaBtnText || 'Partner with Labs'}
             </Link>
             <Link to="/contact" className="btn-gold px-12 py-4 text-lg">
                Investor Enquiries

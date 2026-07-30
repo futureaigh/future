@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot, doc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, onSnapshot, doc } from '../../firebase';
 import { Analytics, Submission } from '../../types';
 import { motion } from 'motion/react';
 import { BarChart3, Users, Mail, TrendingUp } from 'lucide-react';

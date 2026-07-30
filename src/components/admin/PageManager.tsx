@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, serverTimestamp, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, serverTimestamp, getDoc } from '../../firebase';
 import { Page } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Trash2, Edit2, Search, ExternalLink, ShieldCheck, Eye, EyeOff, Globe, Save, ChevronDown, ChevronRight, Layout, Type, Image as ImageIcon, Link as LinkIcon, Star, Upload } from 'lucide-react';

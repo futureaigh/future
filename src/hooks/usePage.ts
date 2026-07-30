@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { onSnapshot, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, onSnapshot, doc } from '../firebase';
 import { Page } from '../types';
 
 export const usePage = (slug: string) => {

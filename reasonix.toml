@@ -1,0 +1,2 @@
+[permissions]
+allow = ["Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null; file \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null)", "Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\" 2>/dev/null | head -40)"]
