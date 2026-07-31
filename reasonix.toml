@@ -1,2 +1,2 @@
 [permissions]
-allow = ["Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null; file \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null)", "Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\" 2>/dev/null | head -40)"]
+allow = ["Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null; file \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\future.zip\" 2>/dev/null)", "Bash(ls -la \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\" 2>/dev/null | head -40)", "Bash(chrome-devtools status 2>&1)", "Bash(mkdir -p \"C:\\Jobs\\FUTURE\\FUTURE TECH\\future\\downloaded-images\" 2>&1)"]
