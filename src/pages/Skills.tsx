@@ -69,7 +69,7 @@ const Skills = () => {
 
       {/* Services Grid */}
       <section className="section-padding py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {displayServices.map((service, i) => {
             const IconComp = iconMap[service.icon] || GraduationCap;
             return (

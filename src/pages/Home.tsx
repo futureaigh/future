@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Zap, Shield, Cpu, Clock, Globe, Quote, Briefcase, GraduationCap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Zap, Shield, Cpu, Clock, Globe, Quote, Briefcase, GraduationCap, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useHomeContent } from '../hooks/useHomeContent';
 import { useCMS } from '../hooks/useCMS';
@@ -10,7 +10,7 @@ const Home = () => {
   const { settings } = useCMS();
 
   const iconMap: Record<string, any> = {
-    Zap, Shield, Cpu, Clock, Globe, Briefcase, GraduationCap, CheckCircle2
+    Zap, Shield, Cpu, Clock, Globe, Briefcase, GraduationCap, CheckCircle2, Video
   };
   const homeContent = page?.content || {};
 
@@ -65,6 +65,22 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Stats Strip */}
+      <section className="bg-brand-navy border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {[
+            { value: '24/7', label: 'Economy Engine' },
+            { value: '100%', label: 'Automated Systems' },
+            { value: '4+', label: 'Core Divisions' }
+          ].map((stat, i) => (
+            <div key={i} className="flex items-center justify-center sm:justify-start gap-4 text-center sm:text-left">
+              <span className="text-4xl md:text-5xl font-display font-bold text-brand-gold tracking-tighter">{stat.value}</span>
+              <span className="text-sm md:text-base text-gray-400 font-semibold uppercase tracking-widest">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 4 Divisions Section */}
       <section className="section-padding py-32 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -105,8 +121,8 @@ const Home = () => {
               </h2>
               <div className="space-y-8">
                 {(services.length > 0 ? services : [
-                  { title: 'Technology is evolving fast', description: 'Many African businesses risk being left behind in the global AI race.', icon: 'Clock' },
-                  { title: 'Complexity is the barrier', description: 'Most modern tools are too foreign or simply too complex.', icon: 'Shield' }
+                  { title: 'Video Production', description: 'High-impact brand documentaries, product commercials, and corporate video storytelling.', icon: 'Video' },
+                  { title: 'AI Training for Teams', description: 'Hands-on workshops teaching corporate teams how to use generative AI for daily business productivity.', icon: 'GraduationCap' }
                 ]).slice(0, 2).map((s: any, i: number) => {
                   const IconComp = iconMap[s.icon] || Briefcase;
                   return (
