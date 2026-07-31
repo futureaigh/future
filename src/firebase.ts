@@ -4,10 +4,11 @@
 // ============================================================
 
 // ---------------------------------------------------------------------------
-// Auth — mock implementation
+// Auth — simple username/password (credentials injected from server env vars)
 // ---------------------------------------------------------------------------
 export interface User {
   uid: string;
+  username: string;
   email: string;
   displayName: string;
   photoURL: string;
@@ -21,11 +22,15 @@ let currentUser: User | null = null;
 const authListeners: ((user: User | null) => void)[] = [];
 
 try {
-  const storedUser = localStorage.getItem('mock_firebase_user');
+  const storedUser = localStorage.getItem('future_admin_session');
   if (storedUser) currentUser = JSON.parse(storedUser);
 } catch (e) {
-  console.error('Failed to parse stored mock user', e);
+  console.error('Failed to parse stored admin session', e);
 }
+
+// Credentials are injected at build time from Railway env vars (see vite.config.ts).
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 export function getAuth(app?: any) {
   return {
@@ -33,29 +38,29 @@ export function getAuth(app?: any) {
   };
 }
 
-export class GoogleAuthProvider {
-  static PROVIDER_ID = 'google.com';
-}
-
-export async function signInWithPopup(authInstance: any, provider: any) {
-  currentUser = {
-    uid: 'mock-admin-uid-123',
-    email: 'palmersarkodee@gmail.com',
-    displayName: 'Mock Administrator',
-    photoURL: 'https://api.dicebear.com/7.x/initials/svg?seed=Admin',
-    emailVerified: true,
-    isAnonymous: false,
-    tenantId: null,
-    providerData: []
-  };
-  localStorage.setItem('mock_firebase_user', JSON.stringify(currentUser));
-  authListeners.forEach(cb => cb(currentUser));
-  return { user: currentUser };
+export async function loginWithPassword(username: string, password: string) {
+  if (username.trim() === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    currentUser = {
+      uid: 'admin-uid-1',
+      username: ADMIN_USERNAME,
+      email: 'admin@future.ai',
+      displayName: 'Administrator',
+      photoURL: 'https://api.dicebear.com/7.x/initials/svg?seed=Admin',
+      emailVerified: true,
+      isAnonymous: false,
+      tenantId: null,
+      providerData: []
+    };
+    localStorage.setItem('future_admin_session', JSON.stringify(currentUser));
+    authListeners.forEach(cb => cb(currentUser));
+    return { user: currentUser };
+  }
+  throw new Error('Invalid username or password.');
 }
 
 export async function signOut(authInstance: any) {
   currentUser = null;
-  localStorage.removeItem('mock_firebase_user');
+  localStorage.removeItem('future_admin_session');
   authListeners.forEach(cb => cb(null));
 }
 
@@ -68,7 +73,6 @@ export function onAuthStateChanged(authInstance: any, callback: (user: User | nu
   };
 }
 
-export const googleProvider = new GoogleAuthProvider();
 export const auth = getAuth();
 
 // ---------------------------------------------------------------------------

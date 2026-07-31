@@ -78,7 +78,7 @@ export const UserManager: React.FC = () => {
                   </div>
                 </td>
                 <td className="px-8 py-6 text-right">
-                  {user.email !== 'palmersarkodee@gmail.com' && (
+                  {user.username !== 'admin' && user.email !== 'admin@future.ai' && (
                     <button onClick={async () => { if(confirm('Remove access?')) await deleteDoc(doc(db, 'users', user.uid)); }} className="p-2 text-gray-600 hover:text-red-500 transition-colors">
                       <Trash2 size={18} />
                     </button>

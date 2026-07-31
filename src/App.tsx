@@ -56,7 +56,7 @@ export default function App() {
       if (user) {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         const userData = userDoc.data();
-        setIsAdmin(userData?.role === 'admin' || user.email === 'palmersarkodee@gmail.com');
+        setIsAdmin(userData?.role === 'admin' || user?.username === 'admin');
       } else {
         setIsAdmin(false);
       }
