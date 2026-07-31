@@ -9,3 +9,6 @@ coverage/
 .agents/
 reasonix.toml
 **/future.zip*/
+downloaded-images/
+extracted/
+*.txt

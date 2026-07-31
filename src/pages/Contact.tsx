@@ -42,7 +42,7 @@ const Contact = () => {
                </div>
                <div>
                  <h4 className="font-bold text-lg">Email Us</h4>
-                 <p className="text-gray-500">{settings?.contactEmail || 'hello@future.simplified'}</p>
+                 <p className="text-gray-500">{settings?.contactEmail || 'futureaigh@gmail.com'}</p>
                </div>
             </div>
             <div className="flex gap-6 items-start">
@@ -51,7 +51,7 @@ const Contact = () => {
                </div>
                <div>
                  <h4 className="font-bold text-lg">Call Us</h4>
-                 <p className="text-gray-500">{settings?.contactPhone || '+233 00 000 0000'}</p>
+                 <p className="text-gray-500">{settings?.contactPhone || '+233 24 300 5804'}</p>
                </div>
             </div>
             <div className="flex gap-6 items-start">
@@ -60,7 +60,7 @@ const Contact = () => {
                </div>
                <div>
                  <h4 className="font-bold text-lg">Visit Us</h4>
-                 <p className="text-gray-500">Accra, Ghana</p>
+                 <p className="text-gray-500">{settings?.contactAddress || 'Accra, Ghana'}</p>
                </div>
             </div>
           </div>
@@ -81,11 +81,11 @@ const Contact = () => {
           <form className="space-y-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">FullName</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Full Name *</label>
                 <input type="text" className="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand-gold outline-none transition-all" placeholder="John Doe" />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email Address</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email Address *</label>
                 <input type="email" className="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand-gold outline-none transition-all" placeholder="john@example.com" />
               </div>
             </div>
@@ -94,13 +94,13 @@ const Contact = () => {
               <select className="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand-gold outline-none transition-all">
                 <option>Custom AI Website</option>
                 <option>WhatsApp Automation</option>
-                <option>AI Training Inquiry</option>
+                <option>AI Training Enquiry</option>
                 <option>Product Support</option>
                 <option>Other</option>
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Your Message</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Your Message *</label>
               <textarea className="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand-gold outline-none transition-all" rows={4} placeholder="How can we help?" />
             </div>
             <button type="submit" className="btn-primary w-full py-4 text-lg">
@@ -127,7 +127,7 @@ const Contact = () => {
         <div className="w-full h-96 bg-gray-100 rounded-3xl flex items-center justify-center text-gray-400 flex-col gap-4 border border-dashed border-gray-300 overflow-hidden">
              <>
                <MapPin size={48} />
-               <p className="font-bold">Google Map Placeholder (Accra, Ghana)</p>
+               <p className="font-bold">Google Map (Accra, Ghana)</p>
              </>
         </div>
       </section>

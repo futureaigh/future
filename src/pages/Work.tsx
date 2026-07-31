@@ -26,14 +26,10 @@ const Work = () => {
   }, []);
 
   const defaultServices = [
-    { title: 'Websites', icon: 'Globe' },
-    { title: 'AI Automations', icon: 'Cpu' },
-    { title: 'CRM Systems', icon: 'Database' },
-    { title: 'Lead Generation Systems', icon: 'UserCheck' },
-    { title: 'Business Workflows', icon: 'Repeat' },
-    { title: 'AI Integrations', icon: 'Bot' },
-    { title: 'Customer Support Systems', icon: 'Headset' },
-    { title: 'Digital Infrastructure', icon: 'Construction' },
+    { title: 'Websites & Web Apps', icon: 'Globe', description: 'High-converting, responsive websites and web applications tailored for modern businesses.', outcome: 'SAVE TIME & CONVERT LEADS' },
+    { title: 'AI Automations', icon: 'Cpu', description: 'Automated customer support, lead routing, and intelligent business workflow integrations.', outcome: '24/7 UNINTERRUPTED SUPPORT' },
+    { title: 'CRM & Lead Systems', icon: 'Database', description: 'Custom customer relationship management, deal tracking, and automated sales funnels.', outcome: 'INCREASE CONVERSION BY 35%' },
+    { title: 'Digital Infrastructure', icon: 'Construction', description: 'Robust cloud deployment, secure database management, and scalable API architecture.', outcome: 'ZERO DOWNTIME RELIABILITY' },
   ];
 
   const displayServices = services.length > 0 ? services : defaultServices;

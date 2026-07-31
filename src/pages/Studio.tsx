@@ -26,14 +26,10 @@ const Studio = () => {
   }, []);
 
   const defaultServices = [
-    { title: 'Video Production', icon: 'Video' },
-    { title: 'Motion Graphics', icon: 'Layers' },
-    { title: 'AI Video', icon: 'Wand2' },
-    { title: 'Brand Visuals', icon: 'Palette' },
-    { title: 'Social Media Creatives', icon: 'Share2' },
-    { title: 'Content Editing', icon: 'Scissors' },
-    { title: 'Photography', icon: 'Camera' },
-    { title: 'Event Coverage', icon: 'FileVideo' },
+    { title: 'Video Production', icon: 'Video', description: 'High-impact brand documentaries, product commercials, and corporate video storytelling.', outcome: 'STAND OUT INSTANTLY' },
+    { title: 'Motion Graphics & AI Visuals', icon: 'Layers', description: 'Dynamic 2D/3D animations, AI-assisted video editing and modern visual effects.', outcome: 'CAPTURE 10X ATTENTION' },
+    { title: 'Social Media Creatives', icon: 'Share2', description: 'Short-form reels, viral social media templates, and high-conversion campaign assets.', outcome: 'VIRAL BRAND REACH' },
+    { title: 'Brand Identity Design', icon: 'Palette', description: 'Complete visual identity systems, brand books, typography pairings, and logo design.', outcome: 'PREMIUM MARKET POSITIONING' },
   ];
 
   const displayServices = services.length > 0 ? services : defaultServices;

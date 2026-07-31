@@ -26,12 +26,10 @@ const Skills = () => {
   }, []);
 
   const defaultServices = [
-    { title: 'AI Training', icon: 'Bot' },
-    { title: 'Social Media Training', icon: 'Share2' },
-    { title: 'Web Design Training', icon: 'Layout' },
-    { title: 'Productivity Workshops', icon: 'Briefcase' },
-    { title: 'Creative Training', icon: 'Palette' },
-    { title: 'Corporate Training', icon: 'Users' },
+    { title: 'AI Training for Teams', icon: 'Bot', description: 'Hands-on workshops teaching corporate teams how to use generative AI for daily business productivity.', outcome: 'CUT HOURS OF MANUAL WORK' },
+    { title: 'Digital Marketing & Social Media', icon: 'Share2', description: 'Practical masterclasses on performance marketing, audience growth, and automated content engines.', outcome: 'GENERATE CONSISTENT LEADS' },
+    { title: 'Web & No-Code Systems', icon: 'Layout', description: 'Empowering non-technical founders to build, launch, and manage modern web platforms.', outcome: 'FULL DIGITAL INDEPENDENCE' },
+    { title: 'Corporate Executive Briefings', icon: 'Briefcase', description: 'High-level strategic briefings on emerging tech trends, AI compliance, and digital transformation.', outcome: 'FUTURE-PROOF LEADERSHIP' },
   ];
 
   const displayServices = services.length > 0 ? services : defaultServices;

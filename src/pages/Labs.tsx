@@ -59,9 +59,9 @@ const Labs = () => {
   ];
 
   const defaultFeaturedProducts = [
-    { id: 'izyflow', name: 'IzyFlow', tagline: 'Smart Invoicing & Business Management', description: 'Simplified invoicing, expense tracking and inventory management for modern businesses.', image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80', accessUrl: 'https://myizyflow.com/', demoUrl: '/contact' },
-    { id: 'izypost', name: 'IzyPost', tagline: 'AI Social Media Management', description: 'Plan, create and schedule social media content with AI-driven insights.', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' },
-    { id: 'izycard', name: 'IzyCard', tagline: 'Smart Business Identification', description: 'Professional digital business cards that sync instantly with contacts.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' }
+    { id: 'izyflow', name: 'IzyFlow', tagline: 'Smart Invoicing & Business Management', description: 'Simplified invoicing, expense tracking and inventory management for modern businesses.', features: ["Instant Invoice Generation", "Expense Tracking", "Inventory Sync", "Payment Gateway Integration"], image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80', accessUrl: 'https://myizyflow.com/', demoUrl: '/contact' },
+    { id: 'izypost', name: 'IzyPost', tagline: 'AI Social Media Management', description: 'Plan, create and schedule social media content with AI-driven insights.', features: ["AI Content Generator", "Multi-Platform Scheduling", "Audience Analytics", "Automated Posting"], image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' },
+    { id: 'izycard', name: 'IzyCard', tagline: 'Smart Business Identification', description: 'Professional digital business cards that sync instantly with contacts.', features: ["NFC & QR Code Sync", "Instant Contact Download", "Custom Branding", "Analytics Dashboard"], image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80', accessUrl: '/contact', demoUrl: '/contact' }
   ];
 
   const displayServices = services.length > 0 ? services : defaultServices;

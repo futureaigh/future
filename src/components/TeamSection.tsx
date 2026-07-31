@@ -8,10 +8,9 @@ import { Link } from 'react-router-dom';
 const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'default-1',
-    name: 'Palmer Sarkodee',
-    position: 'Founder & Chief AI Officer',
-    bio: 'Leading Future with a vision to democratise practical AI solutions, systems and digital automation across Ghana and Africa.',
-    photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    name: 'Palmer Sarkodee Jnr.',
+    position: 'Founder & CEO',
+    bio: 'Palmer is the visionary behind Future (formerly Noko-Fine Space), leading the company\'s strategy, innovation and AI-powered business transformation initiatives. A creative director, filmmaker, AI consultant and business solutions strategist, he specializes in designing practical systems that help African businesses automate operations, improve customer experiences and scale through technology. A graduate in Film Editing from NAFTI/UniMAC and former SRC President, Palmer has collaborated with respected industry leaders including Talal Fattal, Kwaku Sintim-Misa (KSM), Albert & Comfort Ocran, Bessa Simons and Hanna Atiase. At Future, he combines creative thinking, business strategy and emerging technologies to build solutions that make AI simple, practical and accessible for businesses across Africa.',
     linkedin: 'https://linkedin.com',
     twitter: 'https://x.com',
     email: 'palmer@future.ai',
@@ -20,25 +19,23 @@ const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: 'default-2',
-    name: 'Ama Serwaa Mensah',
-    position: 'Head of Product & Solutions',
-    bio: 'Specialist in enterprise system integrations, product strategy and user-focused digital transformation for growing businesses.',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+    name: 'Philip Kofi Marfo',
+    position: 'Digital Marketing Lead',
+    bio: 'Philip is a digital marketing strategist with expertise in experiential marketing, social media, paid advertising, SEO, analytics and customer acquisition. Before joining Future, he contributed to campaigns and digital growth initiatives at Twitchouse Marketing Services, working with leading brands including MTN, Coca-Cola, Tampico, Dettol, Indomie, Boomplay and Graphic NewsPlus. At Future, Philip leads marketing strategy, brand growth, and audience engagement, helping businesses build meaningful customer connections and achieve measurable results through creative, data-driven campaigns.',
     linkedin: 'https://linkedin.com',
     twitter: 'https://x.com',
-    email: 'ama@future.ai',
+    email: 'philip@future.ai',
     order: 1,
     isVisible: true
   },
   {
     id: 'default-3',
-    name: 'Kofi Owusu',
-    position: 'Lead AI & Automation Engineer',
-    bio: 'Engineers resilient AI workflows, custom chatbot architectures, and automated media & data processing pipelines.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    name: 'Samuel D. Ankapong',
+    position: 'Systems & Development Lead',
+    bio: 'Samuel leads the technical development and implementation of Future\'s digital solutions, transforming business ideas into secure, scalable and user-friendly platforms. He specializes in software development, web applications, automation, AI-powered workflows and digital infrastructure, ensuring every solution is built for performance, reliability and long-term growth. At Future, Samuel oversees the architecture and development of business systems, websites and innovative products such as IzyFlow, IzyPost and Future\'s growing ecosystem of AI-powered solutions. His focus is building technology that simplifies operations and helps African businesses scale with confidence. He holds a BSc. in Biomedical Engineering from the University of Ghana.',
     linkedin: 'https://linkedin.com',
     twitter: 'https://x.com',
-    email: 'kofi@future.ai',
+    email: 'samuel@future.ai',
     order: 2,
     isVisible: true
   }

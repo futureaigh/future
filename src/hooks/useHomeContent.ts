@@ -23,25 +23,31 @@ export const useHomeContent = () => {
             { 
               id: 'izyflow', 
               name: 'IzyFlow', 
-              description: 'Take full control of your business finances and operations. From professional invoicing and expense tracking to real-time financial insights, IzyFlow simplifies everything so you can focus on growth.', 
-              tagline: 'The smartest way to manage your business.', 
+              description: 'Simplified invoicing, expense tracking and inventory management for modern businesses.', 
+              tagline: 'Smart Invoicing & Business Management', 
               targetAudience: 'SMEs, Freelancers & Modern Businesses', 
+              features: ["Instant Invoice Generation", "Expense Tracking", "Inventory Sync", "Payment Gateway Integration"],
+              accessUrl: 'https://myizyflow.com/', demoUrl: '/contact',
               order: 1 
             } as Product,
             { 
               id: 'izypost', 
               name: 'IzyPost', 
-              description: 'The ultimate social media command center. Plan, create, and schedule your content across all platforms from a single intuitive calendar.', 
-              tagline: 'Social Media Management, Simplified.', 
+              description: 'Plan, create and schedule social media content with AI-driven insights.', 
+              tagline: 'AI Social Media Management', 
               targetAudience: 'Content Creators & SMEs', 
+              features: ["AI Content Generator", "Multi-Platform Scheduling", "Audience Analytics", "Automated Posting"],
+              accessUrl: '/contact', demoUrl: '/contact',
               order: 2 
             } as Product,
             { 
               id: 'izycard', 
               name: 'IzyCard', 
-              description: 'The intelligent digital business card that works for you. Share your professional identity instantly and manage leads with built-in analytics.', 
-              tagline: 'Networking for the Digital Age.', 
+              description: 'Professional digital business cards that sync instantly with contacts.', 
+              tagline: 'Smart Business Identification', 
               targetAudience: 'Professionals & Sales Teams', 
+              features: ["NFC & QR Code Sync", "Instant Contact Download", "Custom Branding", "Analytics Dashboard"],
+              accessUrl: '/contact', demoUrl: '/contact',
               order: 3 
             } as Product
           ]);
