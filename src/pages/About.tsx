@@ -51,7 +51,7 @@ export default function About() {
 			<PageHeader
 				title="About Us"
 				subtitle={about.whoWeAre.title}
-				imageUrl={content.branding?.headerLogo || ""}
+				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 
 			{/* Who We Are */}

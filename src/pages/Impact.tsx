@@ -34,7 +34,7 @@ export default function Impact() {
 			<PageHeader
 				title={impact.intro.title}
 				subtitle={impact.intro.text}
-				imageUrl={content.branding?.headerLogo || ""}
+				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 
 			{/* Impact highlights */}

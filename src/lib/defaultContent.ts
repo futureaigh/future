@@ -3,6 +3,8 @@ export type NavLink = { label: string; href: string; children?: NavChild[] };
 
 // All image fields default to "" — the client uploads real assets via /admin.
 // Avoid broken <img> tags in pages by rendering an empty-state placeholder.
+const M = (key: string) => `/media/site-content/${key}`;
+
 export const DEFAULT_CONTENT: Record<string, any> = {
 	navbar: {
 		logoText: "TTC & SOGY",
@@ -82,12 +84,12 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			intro:
 				"Turn To Christ Commission and Streets of Gold Youth Conference (TTC & SOGY) is a Christian youth development charity committed to transforming young lives through faith, education, leadership, mentorship, wellbeing, creativity and practical skills.",
 			ctaButtons: ["Discover Our Work", "Partner With Us", "Support a Young Person"],
-			imageUrl: "",
+			imageUrl: M("1787955708700-group.jpg"),
 		},
 		intro: {
 			heading: "Every Young Person Has God-Given Potential",
 			text: "Yet many lack the guidance, opportunities, skills and supportive relationships needed to turn that potential into purpose and impact. TTC & SOGY exists to bridge that gap through Christian outreach, school and community programmes, conferences, mentorship, leadership development and practical learning.\n\nSince our public launch in Ghana in 2022, our programmes have reportedly reached more than 13,000 young people in Ghana and the United Kingdom.",
-			imageUrl: "",
+			imageUrl: M("1787955736423-loc.jpg"),
 			stats: [
 				{ label: "Young People Reached", value: "13,000+" },
 				{ label: "Countries Connected", value: "8+" },
@@ -140,7 +142,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		whoWeAre: {
 			title: "Who We Are",
 			text: "Turn To Christ Commission and Streets of Gold Youth Conference—known collectively as TTC & SOGY—is a Christian youth empowerment and development movement operating under Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685.\n\nWe combine Christian faith and discipleship with holistic youth development. Our work addresses the whole person: spiritual formation, academic growth, health and wellbeing, leadership, employability, entrepreneurship, financial capability, responsible citizenship and future-ready skills. Our programmes are welcoming, compassionate and internationally inclusive.",
-			imageUrl: "",
+			imageUrl: M("1787955708700-group.jpg"),
 		},
 		names: [
 			{
@@ -240,20 +242,20 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "Our Programmes & Projects",
 			subtitle: "Fourteen ways we invest in the whole young person.",
 			list: [
-				{ title: "Streets of Gold Youth Conference", category: "conferences", text: "Our flagship youth empowerment platform bringing together young people, leaders, educators and mentors for teaching, discussion, prayer and practical development." },
-				{ title: "Students Campus Conference", category: "conferences", text: "Taking the mission directly to students through teaching, worship, mentoring and interactive learning." },
-				{ title: "School Outreach Programme", category: "outreach", text: "Age-appropriate Christian encouragement and holistic development sessions in schools." },
-				{ title: "Campus Student Ambassadors Programme", category: "outreach", text: "Representing and promoting the vision within schools, mobilising students and modelling positive conduct." },
-				{ title: "Global Ambassadors Programme", category: "mentorship", text: "Respected leaders and professionals who advance the mission through influence, networks and expertise." },
-				{ title: "Leadership and Mentorship Programme", category: "mentorship", text: "Connecting young people with trusted leaders and positive role models." },
-				{ title: "Entrepreneurship and Financial Intelligence", category: "skills", text: "Foundational concepts in enterprise, problem-solving, money management and responsible stewardship." },
-				{ title: "Critical Thinking and Creativity", category: "skills", text: "Learning to question, analyse, solve problems and communicate with wisdom and imagination." },
-				{ title: "AI, IT and Digital Skills Development", category: "skills", text: "Preparing young people for a technology-driven future through digital confidence and online safety." },
-				{ title: "Health and Wellbeing", category: "skills", text: "Promoting healthy choices and awareness of physical, mental, emotional and spiritual wellbeing." },
-				{ title: "Youth Social Responsibility", category: "skills", text: "Encouraging service, compassion, citizenship and practical community action." },
-				{ title: "Word Dynamics and Christian Discipleship", category: "discipleship", text: "Scripture-based teaching, prayer, worship and mentoring toward a personal relationship with Christ." },
-				{ title: "Effective Learning and Career Guidance", category: "discipleship", text: "Strengthening study habits, exploring options and making informed decisions about the future." },
-				{ title: "Volunteers and Prayer Network", category: "discipleship", text: "Volunteers contributing skills, time and prayer across outreach, events and programme delivery." },
+				{ title: "Streets of Gold Youth Conference", category: "conferences", text: "Our flagship youth empowerment platform bringing together young people, leaders, educators and mentors for teaching, discussion, prayer and practical development.", imageUrl: M("1787955828410-gos_preach.jpg") },
+				{ title: "Students Campus Conference", category: "conferences", text: "Taking the mission directly to students through teaching, worship, mentoring and interactive learning.", imageUrl: M("1787955708700-group.jpg") },
+				{ title: "School Outreach Programme", category: "outreach", text: "Age-appropriate Christian encouragement and holistic development sessions in schools.", imageUrl: M("1787955736423-loc.jpg") },
+				{ title: "Campus Student Ambassadors Programme", category: "outreach", text: "Representing and promoting the vision within schools, mobilising students and modelling positive conduct.", imageUrl: M("1787955889158-why.jpg") },
+				{ title: "Global Ambassadors Programme", category: "mentorship", text: "Respected leaders and professionals who advance the mission through influence, networks and expertise.", imageUrl: M("1787956164029-why.jpg") },
+				{ title: "Leadership and Mentorship Programme", category: "mentorship", text: "Connecting young people with trusted leaders and positive role models.", imageUrl: M("1787955859808-ment.jpg") },
+				{ title: "Entrepreneurship and Financial Intelligence", category: "skills", text: "Foundational concepts in enterprise, problem-solving, money management and responsible stewardship.", imageUrl: M("1787955837490-Ent.jpg") },
+				{ title: "Critical Thinking and Creativity", category: "skills", text: "Learning to question, analyse, solve problems and communicate with wisdom and imagination.", imageUrl: M("1787955849165-Eff.jpg") },
+				{ title: "AI, IT and Digital Skills Development", category: "skills", text: "Preparing young people for a technology-driven future through digital confidence and online safety.", imageUrl: M("1787955849165-Eff.jpg") },
+				{ title: "Health and Wellbeing", category: "skills", text: "Promoting healthy choices and awareness of physical, mental, emotional and spiritual wellbeing.", imageUrl: M("1787955853356-Health.jpg") },
+				{ title: "Youth Social Responsibility", category: "skills", text: "Encouraging service, compassion, citizenship and practical community action.", imageUrl: M("1787955889158-why.jpg") },
+				{ title: "Word Dynamics and Christian Discipleship", category: "discipleship", text: "Scripture-based teaching, prayer, worship and mentoring toward a personal relationship with Christ.", imageUrl: M("1787955828410-gos_preach.jpg") },
+				{ title: "Effective Learning and Career Guidance", category: "discipleship", text: "Strengthening study habits, exploring options and making informed decisions about the future.", imageUrl: M("1787955849165-Eff.jpg") },
+				{ title: "Volunteers and Prayer Network", category: "discipleship", text: "Volunteers contributing skills, time and prayer across outreach, events and programme delivery.", imageUrl: M("1787955859808-ment.jpg") },
 			],
 		},
 		learning: {

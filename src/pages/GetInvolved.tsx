@@ -33,7 +33,7 @@ export default function GetInvolved() {
 			<PageHeader
 				title="Get Involved"
 				subtitle="Invest in a generation — help us raise purposeful, skilled and Christ-centred global leaders."
-				imageUrl={content.branding?.headerLogo || ""}
+				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 
 			{/* Donate */}
