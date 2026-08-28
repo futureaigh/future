@@ -12,6 +12,15 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// 301 www -> apex
+app.use((req, res, next) => {
+	const host = req.get("host") || "";
+	if (host.startsWith("www.")) {
+		return res.redirect(301, `https://${host.slice(4)}${req.originalUrl}`);
+	}
+	next();
+});
+
 const ADMIN_USER = process.env.ADMIN_USERNAME;
 const ADMIN_PASS = process.env.ADMIN_PASSWORD;
 const COOKIE = "ttc_admin";
