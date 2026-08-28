@@ -64,7 +64,7 @@ export default function Contact() {
 			<PageHeader
 				title={contact.title}
 				subtitle={contact.subtitle}
-				imageUrl={content.branding?.headerLogo || ""}
+				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 
 			<Section className="bg-white">

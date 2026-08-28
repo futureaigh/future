@@ -22,7 +22,7 @@ export default function News() {
 			<PageHeader
 				title="News & Events"
 				subtitle="Updates from TTC & SOGY — conferences, outreach and announcements are coming soon."
-				imageUrl={content.branding?.headerLogo || ""}
+				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 
 			<Section className="bg-white">
