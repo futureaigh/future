@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   ChevronDown,
-  ChevronRight,
   Settings,
   Inbox,
   LogOut,
   User,
-  ShieldCheck,
-  AlertCircle
+  ShieldCheck
 } from "lucide-react";
 import {
   db,
@@ -25,7 +23,6 @@ import {
   updateDoc,
   addDoc,
   serverTimestamp,
-  getDoc,
   onAuthStateChanged
 } from "@/lib/firebase";
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
@@ -66,27 +63,32 @@ export default function Admin() {
   const [user, setUser] = useState(auth.currentUser);
   const [isAdmin, setIsAdmin] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loggingIn, setLoggingIn] = useState(false);
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    return onAuthStateChanged(auth, async (u) => {
+    return onAuthStateChanged(auth, (u) => {
       setUser(u);
-      if (u) {
-        // Check if admin
-        try {
-          const adminDoc = await getDoc(doc(db, 'admins', u.uid));
-          const isWhitelisted = u.email === 'nokofinespace@gmail.com';
-          setIsAdmin(adminDoc.exists() || isWhitelisted);
-        } catch (e) {
-          setIsAdmin(u.email === 'nokofinespace@gmail.com');
-        }
-      } else {
-        setIsAdmin(false);
-      }
+      setIsAdmin(!!u);
       setAuthLoading(false);
     });
   }, []);
+
+  async function handleLogin(e: FormEvent) {
+    e.preventDefault();
+    setLoggingIn(true);
+    setLoginError('');
+    try {
+      await login(username, password);
+    } catch (err) {
+      setLoginError('Invalid username or password');
+    } finally {
+      setLoggingIn(false);
+    }
+  }
 
   const { data: submissions = [] } = useQuery({
     queryKey: ["contact-submissions"],
@@ -163,22 +165,49 @@ export default function Admin() {
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
-        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-8 text-center space-y-6">
+        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-8 space-y-6">
           <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto">
             <ShieldCheck className="w-8 h-8 text-blue-600" />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 text-center">
             <h1 className="text-2xl font-black text-gray-900 tracking-tight">Admin Portal</h1>
-            <p className="text-gray-500 text-sm">Please sign in with your authorized Google account to manage the website content.</p>
+            <p className="text-gray-500 text-sm">Sign in to manage website content.</p>
           </div>
-          <button
-            onClick={() => login()}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gray-900 text-white rounded-2xl font-bold transition-all hover:bg-gray-800 active:scale-[0.98]"
-          >
-            <img src={getSectionData('branding').adminLogo || "https://www.google.com/favicon.ico"} className="w-5 h-5 object-contain" alt="Login" />
-            Sign in with Google
-          </button>
-          <Link to="/" className="block text-xs text-gray-400 font-medium hover:text-gray-600 pt-2 transition-colors">
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+                autoComplete="username"
+                required
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+                autoComplete="current-password"
+                required
+              />
+            </div>
+            {loginError && (
+              <p className="text-sm text-red-600 font-medium">{loginError}</p>
+            )}
+            <button
+              type="submit"
+              disabled={loggingIn}
+              className="w-full px-6 py-4 bg-gray-900 text-white rounded-2xl font-bold transition-all hover:bg-gray-800 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loggingIn ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
+          <Link to="/" className="block text-center text-xs text-gray-400 font-medium hover:text-gray-600 pt-2 transition-colors">
             Back to public site
           </Link>
         </div>
@@ -188,14 +217,14 @@ export default function Admin() {
 
   if (!isAdmin) {
     return (
-       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
         <div className="max-w-md w-full bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-8 text-center space-y-6 border-t-4 border-red-500">
           <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mx-auto">
-            <AlertCircle className="w-8 h-8 text-red-600" />
+            <ShieldCheck className="w-8 h-8 text-red-600" />
           </div>
           <div className="space-y-2">
             <h1 className="text-2xl font-black text-gray-900 tracking-tight">Unauthorized Access</h1>
-            <p className="text-gray-500 text-sm">Your account ({user.email}) is not authorized to access this portal.</p>
+            <p className="text-gray-500 text-sm">Your account is not authorized to access this portal.</p>
           </div>
           <button
             onClick={() => logout()}
@@ -268,7 +297,7 @@ export default function Admin() {
           <div className="flex items-center gap-3">
              <div className="hidden md:block text-right">
                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Admin User</p>
-                <p className="text-xs font-bold text-gray-900 leading-none">{user.email}</p>
+                <p className="text-xs font-bold text-gray-900 leading-none">{user.username}</p>
              </div>
              <button
               onClick={() => logout()}

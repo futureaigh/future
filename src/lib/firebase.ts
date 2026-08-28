@@ -31,21 +31,23 @@ export const auth = {
   }
 };
 
-export const googleProvider = {};
-
-export async function login() {
-  const email = window.prompt("Enter admin email to sign in:", "nokofinespace@gmail.com");
-  if (email) {
-    currentUser = {
-      uid: 'mock-admin-' + email.replace(/[^a-zA-Z0-9]/g, ''),
-      email: email,
-      displayName: email.split('@')[0]
-    };
-    localStorage.setItem('ttc_auth_user', JSON.stringify(currentUser));
-    listeners.forEach(cb => cb(currentUser));
-    return currentUser;
+export async function login(username: string, password: string) {
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  });
+  if (!res.ok) {
+    throw new Error('Invalid username or password');
   }
-  throw new Error("Login cancelled");
+  currentUser = {
+    uid: 'admin-' + username.replace(/[^a-zA-Z0-9]/g, ''),
+    username,
+    displayName: username,
+  };
+  localStorage.setItem('ttc_auth_user', JSON.stringify(currentUser));
+  listeners.forEach(cb => cb(currentUser));
+  return currentUser;
 }
 
 export async function logout() {
