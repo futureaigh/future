@@ -1,7 +1,7 @@
 export type NavChild = { label: string; href: string };
 export type NavLink = { label: string; href: string; children?: NavChild[] };
 
-// All image fields default to "" — the client uploads real assets via /admin.
+// All image fields default to "". The client uploads real assets via /admin.
 // Avoid broken <img> tags in pages by rendering an empty-state placeholder.
 const M = (key: string) => `/media/site-content/${key}`;
 
@@ -68,7 +68,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	seo: {
 		title: "TTC & SOGY | Christ-Centred Youth Development Charity",
 		description:
-			"Turn To Christ Commission & Streets of Gold Youth Conference — a Christian youth development charity raising purposeful, skilled and Christ-centred global leaders.",
+			"Turn To Christ Commission & Streets of Gold Youth Conference is a Christian youth development charity raising purposeful, skilled and Christ-centred global leaders.",
 		keywords:
 			"youth development, christian charity, ttc, sogy, youth conference, mentorship, leadership, discipleship, youth empowerment",
 		ogImage: "",
@@ -80,7 +80,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	home: {
 		hero: {
 			title: "Raising a Generation of Purposeful, Skilled and Christ-Centred Global Leaders",
-			quote: "“Let no one despise your youth, but be an example…” — 1 Timothy 4:12",
+			quote: "“Let no one despise your youth, but be an example…” 1 Timothy 4:12",
 			intro:
 				"Turn To Christ Commission and Streets of Gold Youth Conference (TTC & SOGY) is a Christian youth development charity committed to transforming young lives through faith, education, leadership, mentorship, wellbeing, creativity and practical skills.",
 			ctaButtons: ["Discover Our Work", "Partner With Us", "Support a Young Person"],
@@ -121,7 +121,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		},
 		invitation: {
 			title: "There Is a Place for You in This Vision",
-			text: "Whether you are a young person, parent, school, church, volunteer, donor, philanthropist, corporate organisation or community leader, there is a place for you in this vision. Together, we can raise a generation of Daniels, Josephs, Esthers and Deborahs—young people of wisdom, courage, excellence, faith and influence.",
+			text: "Whether you are a young person, parent, school, church, volunteer, donor, philanthropist, corporate organisation or community leader, there is a place for you in this vision. Together, we can raise a generation of Daniels, Josephs, Esthers and Deborahs, young people of wisdom, courage, excellence, faith and influence.",
 			imageUrl: "",
 		},
 		getInvolved: {
@@ -141,7 +141,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	about: {
 		whoWeAre: {
 			title: "Who We Are",
-			text: "Turn To Christ Commission and Streets of Gold Youth Conference—known collectively as TTC & SOGY—is a Christian youth empowerment and development movement operating under Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685.\n\nWe combine Christian faith and discipleship with holistic youth development. Our work addresses the whole person: spiritual formation, academic growth, health and wellbeing, leadership, employability, entrepreneurship, financial capability, responsible citizenship and future-ready skills. Our programmes are welcoming, compassionate and internationally inclusive.",
+			text: "Turn To Christ Commission and Streets of Gold Youth Conference, known collectively as TTC & SOGY, is a Christian youth empowerment and development movement operating under Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685.\n\nWe combine Christian faith and discipleship with holistic youth development. Our work addresses the whole person: spiritual formation, academic growth, health and wellbeing, leadership, employability, entrepreneurship, financial capability, responsible citizenship and future-ready skills. Our programmes are welcoming, compassionate and internationally inclusive.",
 			imageUrl: M("1787955708700-group.jpg"),
 		},
 		names: [
@@ -157,7 +157,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		foundation: {
 			title: "Our Biblical Foundation",
 			verse:
-				"The vision was birthed on 21 November 2020 while the founder was studying Acts 16:31: “Believe in the Lord Jesus, and you will be saved—you and your household.”",
+				"The vision was birthed on 21 November 2020 while the founder was studying Acts 16:31: “Believe in the Lord Jesus, and you will be saved, you and your household.”",
 			text: "Our youth development mandate is also inspired by Daniel 1:17, Daniel 1:20 and Daniel 6:3, which speak of God-given knowledge, wisdom and an excellent spirit.",
 		},
 		motto: {
@@ -175,7 +175,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				{ date: "2020", title: "The Birth of the Vision", text: "The vision was birthed on 21 November 2020 through Acts 16:31, with a mandate to lead people and households to Christ." },
 				{ date: "2021", title: "Building the Foundation", text: "The early period focused on prayer, vision development and establishing the foundations for a youth movement." },
 				{ date: "2022", title: "Public Launch in Ghana", text: "TTC & SOGY was publicly launched on 22 October 2022 at Accra High School, hosting its inaugural Students Conference at the same school." },
-				{ date: "2023–2024", title: "Expansion Across Schools & Communities", text: "Work expanded through school and community engagement across multiple Ghanaian institutions." },
+				{ date: "2023-2024", title: "Expansion Across Schools & Communities", text: "Work expanded through school and community engagement across multiple Ghanaian institutions." },
 				{ date: "2025", title: "Growing Impact", text: "The Students Campus Conference on 1 November 2025 at PRESEC Mampong carried the theme “The King of Glory”, reporting approximately 1,200 decisions for Christ." },
 				{ date: "2026", title: "Five Years of Grace and Impact", text: "The Global Youth Empowerment Conference on 15 August 2026 ran under “Defy Despise; Live With Purpose”, connecting youth communities across Ghana, Zambia, the United States, the United Kingdom, Jamaica, Antigua and Barbuda, Uganda and India." },
 			],
@@ -184,7 +184,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "Our Vision",
 			text: "To see a globally connected generation of Christ-centred, purpose-driven, skilled and compassionate young leaders transforming communities, institutions and nations.",
 			expanded:
-				"We envision a world in which every young person—regardless of background, geography or economic circumstance—has the spiritual foundation, knowledge, mentorship, confidence and opportunity needed to fulfil their God-given potential.",
+				"We envision a world in which every young person, regardless of background, geography or economic circumstance, has the spiritual foundation, knowledge, mentorship, confidence and opportunity needed to fulfil their God-given potential.",
 		},
 		mission: {
 			title: "Our Mission",
@@ -342,7 +342,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		},
 		talentHubs: {
 			title: "TTC & SOGY Talent Hubs",
-			text: "Our long-term ambition is to establish Talent Hubs in selected communities—accessible, youth-friendly centres providing a consistent environment for mentoring, learning, creativity, technology, enterprise and personal development.",
+			text: "Our long-term ambition is to establish Talent Hubs in selected communities, accessible, youth-friendly centres providing a consistent environment for mentoring, learning, creativity, technology, enterprise and personal development.",
 			services: [
 				"Leadership and mentorship sessions",
 				"Career guidance and employability support",
@@ -429,7 +429,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		},
 		whyItMatters: {
 			title: "Why Our Work Matters",
-			text: "Young people face pressures relating to identity, faith, education, employment, technology, mental wellbeing, finances and relationships. TTC & SOGY responds by combining spiritual foundation with practical preparation—equipping young people, not limiting them.",
+			text: "Young people face pressures relating to identity, faith, education, employment, technology, mental wellbeing, finances and relationships. TTC & SOGY responds by combining spiritual foundation with practical preparation, equipping young people, not limiting them.",
 		},
 	},
 
@@ -479,7 +479,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// --------------------------------------------------------------------
 	founder: {
 		title: "A Message from the Founder",
-		text: "This vision was birthed from Acts 16:31 on 21 November 2020 with a burden to see individuals and households turn to Christ and to raise a generation of young people who are spiritually grounded, intellectually equipped and prepared to lead.\n\nI believe there is greatness within every young person. With faith, mentorship, education, opportunity and the right environment, they can rise above limitation and become transformational leaders in their families, communities and nations.\n\nOur calling is to raise Daniels, Josephs, Esthers and Deborahs—young people of wisdom, courage, integrity, creativity and an excellent spirit.",
+		text: "This vision was birthed from Acts 16:31 on 21 November 2020 with a burden to see individuals and households turn to Christ and to raise a generation of young people who are spiritually grounded, intellectually equipped and prepared to lead.\n\nI believe there is greatness within every young person. With faith, mentorship, education, opportunity and the right environment, they can rise above limitation and become transformational leaders in their families, communities and nations.\n\nOur calling is to raise Daniels, Josephs, Esthers and Deborahs, young people of wisdom, courage, integrity, creativity and an excellent spirit.",
 		name: "Amb. Pastor Botsio Godsgift Appiah Bossman",
 		role: "Founder & Executive Director",
 		imageUrl: "",
@@ -488,7 +488,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	shared: {
 		tagline: "Empowered by Faith. Equipped for the Future.",
 		footerText:
-			"We invest in the whole young person—spirit, mind, character and potential. TTC & SOGY helps young people move from vulnerability and limited opportunity towards purpose, confidence, leadership and positive social impact.",
+			"We invest in the whole young person: spirit, mind, character and potential. TTC & SOGY helps young people move from vulnerability and limited opportunity towards purpose, confidence, leadership and positive social impact.",
 		charityNumber: "1212685",
 	},
 };

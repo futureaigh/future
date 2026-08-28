@@ -24,7 +24,7 @@ export default function WhatWeDo() {
 				<title>What We Do | TTC & SOGY</title>
 				<meta
 					name="description"
-					content="Our programmes and projects — conferences, school outreach, mentorship, skills and Christian discipleship."
+					content="Our programme and projects: conferences, school outreach, mentorship, skills and Christian discipleship."
 				/>
 			</Helmet>
 

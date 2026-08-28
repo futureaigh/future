@@ -21,7 +21,7 @@ export default function News() {
 
 			<PageHeader
 				title="News & Events"
-				subtitle="Updates from TTC & SOGY — conferences, outreach and announcements are coming soon."
+				subtitle="Updates from TTC & SOGY. Conferences, outreach and announcements are coming soon."
 				imageUrl={"/media/site-content/1787955708700-group.jpg"}
 			/>
 

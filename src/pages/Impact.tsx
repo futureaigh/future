@@ -27,7 +27,7 @@ export default function Impact() {
 				<title>Our Impact | TTC & SOGY</title>
 				<meta
 					name="description"
-					content="The impact of TTC & SOGY — more than 13,000 young people reached in Ghana and the United Kingdom since 2022."
+					content="The impact of TTC & SOGY: more than 13,000 young people reached in Ghana and the United Kingdom since 2022."
 				/>
 			</Helmet>
 

@@ -57,7 +57,7 @@ export default function Contact() {
 				<title>Contact Us | TTC & SOGY</title>
 				<meta
 					name="description"
-					content="Get in touch with TTC & SOGY — general enquiries, partnerships, volunteering, donations and safeguarding."
+					content="Get in touch with TTC & SOGY for general enquiries, partnerships, volunteering, donations and safeguarding."
 				/>
 			</Helmet>
 

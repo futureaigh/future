@@ -51,7 +51,7 @@ export async function logout() {
 	try {
 		await fetch("/api/logout", { method: "POST" });
 	} catch {
-		/* network error on logout — still clear local */
+		/* network error on logout, still clear local */
 	}
 	currentUser = null;
 	localStorage.removeItem("ttc_auth_user");
