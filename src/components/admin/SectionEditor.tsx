@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect, ChangeEvent } from 'react';
-import { Save, Loader2, Upload, X, Image as ImageIcon } from 'lucide-react';
-import { ref, uploadBytesResumable, getDownloadURL, storage } from '@/lib/firebase';
+import { useState, useRef, type ChangeEvent } from 'react';
+import { Save, Loader2, Upload, X } from 'lucide-react';
+import { uploadImage } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 
@@ -12,70 +12,7 @@ interface SectionEditorProps {
   isSaving: boolean;
 }
 
-const compressFileToBase64 = (file: File, isLogo: boolean = false): Promise<string> => {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      if (file.size < 50 * 1024 || file.type === 'image/svg+xml') {
-        resolve(result);
-        return;
-      }
-
-      const img = new Image();
-      img.src = result;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        let width = img.width;
-        let height = img.height;
-
-        const maxDim = 800;
-        if (width > maxDim || height > maxDim) {
-          if (width > height) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          resolve(result);
-          return;
-        }
-
-        ctx.drawImage(img, 0, 0, width, height);
-        
-        const mimeType = (file.type || '').toLowerCase();
-        const fileName = (file.name || '').toLowerCase();
-        const isPng = mimeType === 'image/png' || fileName.endsWith('.png');
-        const isGif = mimeType === 'image/gif' || fileName.endsWith('.gif');
-        const isWebp = mimeType === 'image/webp' || fileName.endsWith('.webp');
-        const isSvg = mimeType.includes('svg') || fileName.endsWith('.svg');
-
-        if (isLogo || isPng || isGif || isWebp || isSvg) {
-          // Preserve transparency using PNG
-          resolve(canvas.toDataURL('image/png'));
-        } else {
-          resolve(canvas.toDataURL('image/jpeg', 0.8));
-        }
-      };
-      img.onerror = () => {
-        resolve(result);
-      };
-    };
-    reader.onerror = () => {
-      resolve('');
-    };
-  });
-};
-
-export default function SectionEditor({ sectionKey, data, onSave, isSaving }: SectionEditorProps) {
+export default function SectionEditor({ data, onSave, isSaving }: SectionEditorProps) {
   const [formData, setFormData] = useState(data);
   const [uploading, setUploading] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -110,60 +47,9 @@ export default function SectionEditor({ sectionKey, data, onSave, isSaving }: Se
     setUploadProgress(0);
 
     try {
-      let url = '';
-      try {
-        const storageRef = ref(storage, `site-content/${sectionKey}/${Date.now()}-${file.name}`);
-        const metadata = {
-          contentType: file.type || 'image/png'
-        };
-        const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-
-        // Fail-fast timeout: If Firebase Storage doesn't connect/complete within 2 seconds,
-        // cancel the task and fall back immediately to optimized client-side Base64.
-        const timeoutId = setTimeout(() => {
-          console.warn('Firebase Storage upload took more than 2 seconds. Cancelling and falling back to direct optimized Base64.');
-          try {
-            uploadTask.cancel();
-          } catch (cancelErr) {
-            console.error('Error cancelling Firebase upload task:', cancelErr);
-          }
-        }, 2000);
-
-        url = await new Promise<string>((resolve, reject) => {
-          uploadTask.on('state_changed',
-            (snapshot) => {
-              const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-              setUploadProgress(progress);
-            },
-            (error) => {
-              clearTimeout(timeoutId);
-              reject(error);
-            },
-            async () => {
-              clearTimeout(timeoutId);
-              try {
-                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                resolve(downloadURL);
-              } catch (urlError) {
-                reject(urlError);
-              }
-            }
-          );
-        });
-      } catch (storageError) {
-        console.warn('Firebase Storage upload failed, falling back to optimized client-base64 storage:', storageError);
-        setUploadProgress(30);
-        const isLogo = fieldKey.toLowerCase().includes('logo') || 
-                       fieldKey.toLowerCase().includes('favicon') ||
-                       (subField || '').toLowerCase().includes('logo') ||
-                       (subField || '').toLowerCase().includes('favicon');
-        url = await compressFileToBase64(file, isLogo);
-        setUploadProgress(70);
-        if (!url) {
-          throw new Error('Fallback base64 encoding failed');
-        }
-        setUploadProgress(100);
-      }
+      setUploadProgress(30);
+      const url = await uploadImage(file);
+      setUploadProgress(100);
 
       let updatedFormData = { ...formData };
       if (index !== undefined && subField) {

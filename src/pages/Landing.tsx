@@ -17,9 +17,8 @@ import {
   Mail,
   Phone
 } from "lucide-react";
-import { db, collection, getDocs, addDoc, serverTimestamp } from "@/lib/firebase";
+import { fetchContent, createSubmission } from "@/lib/api";
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
-import { SiteContentRecord } from "@/types";
 
 export default function Landing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,10 +38,7 @@ export default function Landing() {
 
   const { data: records = [], isLoading } = useQuery({
     queryKey: ["site-content"],
-    queryFn: async () => {
-      const snapshot = await getDocs(collection(db, "site_content"));
-      return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as SiteContentRecord));
-    },
+    queryFn: fetchContent,
   });
 
   const getSectionData = (key: string) => {
@@ -84,11 +80,10 @@ export default function Landing() {
       phone: formData.get("phone"),
       interest: formData.get("interest"),
       message: formData.get("message"),
-      created_date: serverTimestamp(),
     };
 
     try {
-      await addDoc(collection(db, "submissions"), data);
+      await createSubmission(data);
       setSubmitted(true);
       (e.target as HTMLFormElement).reset();
     } catch (error) {
