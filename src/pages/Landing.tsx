@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion, useScroll, useTransform } from "motion/react";
 import {
-	ChevronRight,
 	ArrowRight,
 	Users,
 	CheckCircle2,
@@ -16,9 +15,32 @@ import {
 	Linkedin,
 	Mail,
 	Phone,
+	Target,
+	Eye,
+	GraduationCap,
+	Church,
+	BookOpen,
+	Handshake,
+	Sprout,
+	Megaphone,
+	Presentation,
+	Heart,
 } from "lucide-react";
 import { fetchContent, createSubmission } from "@/lib/api";
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
+
+const WHYCHOOSE_ICONS = [
+	<Church className="w-5 h-5" />,
+	<BookOpen className="w-5 h-5" />,
+	<Handshake className="w-5 h-5" />,
+	<Sprout className="w-5 h-5" />,
+];
+
+const GET_INVOLVED_ICONS = [
+	<Megaphone className="w-7 h-7" />,
+	<Presentation className="w-7 h-7" />,
+	<Heart className="w-7 h-7" />,
+];
 
 export default function Landing() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -396,7 +418,7 @@ export default function Landing() {
 						>
 							<div className="relative z-10 space-y-6">
 								<div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
-									<span className="text-2xl">🎯</span>
+									<Target className="w-6 h-6" />
 								</div>
 								<h3 className="text-3xl font-black tracking-tight">
 									{content.missionVision.mission.title}
@@ -415,7 +437,7 @@ export default function Landing() {
 						>
 							<div className="relative z-10 space-y-6">
 								<div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
-									<span className="text-2xl">👁️</span>
+									<Eye className="w-6 h-6" />
 								</div>
 								<h3 className="text-3xl font-black text-blue-600 tracking-tight">
 									{content.missionVision.vision.title}
@@ -512,8 +534,8 @@ export default function Landing() {
 						/>
 						<div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-900/60 to-transparent"></div>
 						<div className="relative z-10 p-12 md:p-20 max-w-2xl space-y-8">
-							<div className="w-16 h-16 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center text-3xl">
-								🎓
+							<div className="w-16 h-16 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center">
+								<GraduationCap className="w-8 h-8" />
 							</div>
 							<div className="space-y-4">
 								<h2 className="text-4xl md:text-5xl font-black tracking-tight">
@@ -555,9 +577,7 @@ export default function Landing() {
 									className="p-8 bg-gray-50 rounded-3xl border border-gray-100 space-y-4 hover:shadow-xl transition-all"
 								>
 									<div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
-										<span className="text-xl">
-											{["✝️", "📚", "🤝", "🌱"][i]}
-										</span>
+										{WHYCHOOSE_ICONS[i]}
 									</div>
 									<h4 className="text-lg font-black text-gray-900 tracking-tight">
 										{point.title}
@@ -608,8 +628,8 @@ export default function Landing() {
 								key={i}
 								className="p-10 bg-white rounded-[40px] shadow-lg text-center space-y-6 hover:shadow-2xl transition-all"
 							>
-								<div className="w-16 h-16 bg-gray-50 rounded-2xl mx-auto flex items-center justify-center text-4xl">
-									{["📢", "👩‍🏫", "💛"][i]}
+								<div className="w-16 h-16 bg-gray-50 rounded-2xl mx-auto flex items-center justify-center">
+									{GET_INVOLVED_ICONS[i]}
 								</div>
 								<h3 className="text-xl font-black text-gray-900 tracking-tight leading-tight">
 									{item.title}
@@ -646,8 +666,8 @@ export default function Landing() {
 								animate={{ opacity: 1, scale: 1 }}
 								className="space-y-6 py-12"
 							>
-								<div className="w-20 h-20 bg-green-50 rounded-full mx-auto flex items-center justify-center text-green-500 text-4xl">
-									✅
+								<div className="w-20 h-20 bg-green-50 rounded-full mx-auto flex items-center justify-center text-green-500">
+									<CheckCircle2 className="w-10 h-10" />
 								</div>
 								<p className="text-2xl font-black text-gray-900">
 									Message Received!
@@ -797,7 +817,7 @@ export default function Landing() {
 									) : i === 1 ? (
 										<span className="text-2xl">$</span>
 									) : (
-										<span className="text-2xl">🎓</span>
+										<GraduationCap className="w-7 h-7" />
 									)}
 								</div>
 								<h3 className="text-xl font-black text-gray-900 tracking-tight leading-tight">
@@ -925,7 +945,7 @@ export default function Landing() {
 							Admin Dashboard
 						</Link>
 						<p className="text-xs font-bold text-gray-500 flex items-center gap-1">
-							Made with <span className="text-red-500 text-sm">❤️</span> for the
+							Made with <Heart className="w-3.5 h-3.5 text-red-500" /> for the
 							Gospel
 						</p>
 					</div>

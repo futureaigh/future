@@ -9,6 +9,20 @@ import {
 	LogOut,
 	User,
 	ShieldCheck,
+	PanelTop,
+	Image,
+	Search,
+	Home,
+	Info,
+	Target,
+	Flag,
+	GraduationCap,
+	Star,
+	Handshake,
+	BookOpen,
+	Gift,
+	HeartHandshake,
+	Phone,
 } from "lucide-react";
 import {
 	auth,
@@ -34,20 +48,20 @@ const INTEREST_LABELS = {
 };
 
 const SECTIONS = [
-	{ key: "navbar", label: "Navbar / Header", emoji: "🔝" },
-	{ key: "branding", label: "Branding (Logos & Favicon)", emoji: "🖼️" },
-	{ key: "seo", label: "SEO Metadata", emoji: "🔍" },
-	{ key: "hero", label: "Hero Section", emoji: "🏠" },
-	{ key: "about", label: "About Section", emoji: "ℹ️" },
-	{ key: "missionVision", label: "Mission & Vision", emoji: "🎯" },
-	{ key: "objectives", label: "Key Objectives", emoji: "🚩" },
-	{ key: "empowering", label: "Empowering Students", emoji: "🎓" },
-	{ key: "whychoose", label: "Why Choose TTC", emoji: "⭐" },
-	{ key: "getInvolved", label: "Get Involved", emoji: "🤝" },
-	{ key: "education", label: "Investing in Education", emoji: "📚" },
-	{ key: "partnershipRewards", label: "Partnership Rewards", emoji: "🎁" },
-	{ key: "thankYou", label: "Thank You Note", emoji: "🙏" },
-	{ key: "contact", label: "Contact & Footer", emoji: "📞" },
+	{ key: "navbar", label: "Navbar / Header", icon: PanelTop },
+	{ key: "branding", label: "Branding (Logos & Favicon)", icon: Image },
+	{ key: "seo", label: "SEO Metadata", icon: Search },
+	{ key: "hero", label: "Hero Section", icon: Home },
+	{ key: "about", label: "About Section", icon: Info },
+	{ key: "missionVision", label: "Mission & Vision", icon: Target },
+	{ key: "objectives", label: "Key Objectives", icon: Flag },
+	{ key: "empowering", label: "Empowering Students", icon: GraduationCap },
+	{ key: "whychoose", label: "Why Choose TTC", icon: Star },
+	{ key: "getInvolved", label: "Get Involved", icon: Handshake },
+	{ key: "education", label: "Investing in Education", icon: BookOpen },
+	{ key: "partnershipRewards", label: "Partnership Rewards", icon: Gift },
+	{ key: "thankYou", label: "Thank You Note", icon: HeartHandshake },
+	{ key: "contact", label: "Contact & Footer", icon: Phone },
 ];
 
 export default function Admin() {
@@ -424,8 +438,8 @@ export default function Admin() {
 										className="w-full flex items-center justify-between px-8 py-6 transition-colors group"
 									>
 										<div className="flex items-center gap-4">
-											<div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-blue-50 group-hover:scale-110 transition-all duration-300">
-												{section.emoji}
+											<div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-50 group-hover:scale-110 transition-all duration-300">
+												<section.icon className="w-6 h-6" />
 											</div>
 											<div className="text-left">
 												<span className="block font-black text-gray-900 text-lg tracking-tight leading-none mb-1">
