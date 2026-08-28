@@ -266,7 +266,7 @@ export default function Landing() {
 			{/* Hero Section */}
 			<section
 				id="home"
-				className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0a1a3a]"
+				className="relative min-h-screen flex items-center pt-20 pb-28 overflow-hidden bg-[#0a1a3a]"
 			>
 				<div className="absolute inset-0">
 					<img
