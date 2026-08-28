@@ -16,13 +16,11 @@ import {
 	Info,
 	Target,
 	Flag,
-	GraduationCap,
-	Star,
-	Handshake,
 	BookOpen,
 	Gift,
 	HeartHandshake,
 	Phone,
+	Handshake,
 } from "lucide-react";
 import {
 	auth,
@@ -50,18 +48,17 @@ const INTEREST_LABELS = {
 const SECTIONS = [
 	{ key: "navbar", label: "Navbar / Header", icon: PanelTop },
 	{ key: "branding", label: "Branding (Logos & Favicon)", icon: Image },
-	{ key: "seo", label: "SEO Metadata", icon: Search },
-	{ key: "hero", label: "Hero Section", icon: Home },
-	{ key: "about", label: "About Section", icon: Info },
-	{ key: "missionVision", label: "Mission & Vision", icon: Target },
-	{ key: "objectives", label: "Key Objectives", icon: Flag },
-	{ key: "empowering", label: "Empowering Students", icon: GraduationCap },
-	{ key: "whychoose", label: "Why Choose TTC", icon: Star },
+	{ key: "seo", label: "SEO Metadata (Home)", icon: Search },
+	{ key: "home", label: "Home Page", icon: Home },
+	{ key: "about", label: "About Us", icon: Info },
+	{ key: "whatWeDo", label: "What We Do", icon: BookOpen },
+	{ key: "impact", label: "Our Impact", icon: Target },
+	{ key: "future", label: "Our Future", icon: Flag },
 	{ key: "getInvolved", label: "Get Involved", icon: Handshake },
-	{ key: "education", label: "Investing in Education", icon: BookOpen },
-	{ key: "partnershipRewards", label: "Partnership Rewards", icon: Gift },
-	{ key: "thankYou", label: "Thank You Note", icon: HeartHandshake },
-	{ key: "contact", label: "Contact & Footer", icon: Phone },
+	{ key: "contact", label: "Contact", icon: Phone },
+	{ key: "faq", label: "FAQs", icon: Target },
+	{ key: "founder", label: "Founder's Message", icon: HeartHandshake },
+	{ key: "shared", label: "Footer & Tagline", icon: Gift },
 ];
 
 export default function Admin() {
