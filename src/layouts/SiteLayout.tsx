@@ -15,10 +15,15 @@ export default function SiteLayout({ children, contentOverride }: SiteLayoutProp
 	const location = useLocation();
 
 	useEffect(() => {
-		if (!location.hash) {
-			window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+		if (location.hash) {
+			const el = document.querySelector(location.hash);
+			if (el) {
+				el.scrollIntoView({ behavior: "smooth", block: "start" });
+				return;
+			}
 		}
-	}, [location.pathname]);
+		window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+	}, [location.pathname, location.hash]);
 
 	if (isLoading) return <Loading />;
 
