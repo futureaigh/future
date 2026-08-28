@@ -58,9 +58,11 @@ async function initDb() {
       email TEXT NOT NULL,
       phone TEXT,
       interest TEXT,
+      source TEXT,
       message TEXT,
       created_date TIMESTAMPTZ NOT NULL DEFAULT now()
     );
+    ALTER TABLE submissions ADD COLUMN IF NOT EXISTS source TEXT;
   `);
 }
 
@@ -165,7 +167,7 @@ app.put("/api/content/:key", auth, async (req, res) => {
 app.get("/api/submissions", auth, async (req, res) => {
 	try {
 		const { rows } = await pool.query(
-			"SELECT id, name, email, phone, interest, message, created_date FROM submissions ORDER BY created_date DESC",
+			"SELECT id, name, email, phone, interest, source, message, created_date FROM submissions ORDER BY created_date DESC",
 		);
 		res.json(rows);
 	} catch (e) {
@@ -175,13 +177,13 @@ app.get("/api/submissions", auth, async (req, res) => {
 });
 
 app.post("/api/submissions", async (req, res) => {
-	const { name, email, phone, interest, message } = req.body || {};
+	const { name, email, phone, interest, source, message } = req.body || {};
 	if (!name || !email)
 		return res.status(400).json({ error: "name and email required" });
 	try {
 		await pool.query(
-			`INSERT INTO submissions (name, email, phone, interest, message) VALUES ($1, $2, $3, $4, $5)`,
-			[name, email, phone || null, interest || null, message || null],
+			`INSERT INTO submissions (name, email, phone, interest, source, message) VALUES ($1, $2, $3, $4, $5, $6)`,
+			[name, email, phone || null, interest || null, source || null, message || null],
 		);
 		res.json({ ok: true });
 	} catch (e) {
