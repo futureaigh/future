@@ -208,19 +208,23 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				{ title: "Accountability and Stewardship", text: "We measure our work responsibly and remain accountable to those we serve." },
 			],
 		},
-		leadership: {
-			title: "Leadership and Governance",
-			subtitle: "Turn To Christ Crusade is governed by its trustees and led by its executive team.",
-			text: "The trustees carry responsibility for the charity's strategic oversight, legal compliance, financial stewardship, safeguarding and accountability. The founder provides executive leadership for the delivery and development of the vision, while remaining accountable to the trustee body.",
-			profiles: [
-				{
-					name: "Amb. Pastor Botsio Godsgift Appiah Bossman",
-					role: "Founder & Executive Director",
-					bio: "Founder of Turn To Christ Commission & Streets of Gold Youth Conference.",
-					imageUrl: "",
-				},
-			],
-		},
+	},
+
+	// --------------------------------------------------------------------
+	// LEADERSHIP & GOVERNANCE
+	// --------------------------------------------------------------------
+	leadership: {
+		title: "Leadership and Governance",
+		subtitle: "Turn To Christ Crusade is governed by its trustees and led by its executive team.",
+		text: "The trustees carry responsibility for the charity's strategic oversight, legal compliance, financial stewardship, safeguarding and accountability. The founder provides executive leadership for the delivery and development of the vision, while remaining accountable to the trustee body.",
+		profiles: [
+			{
+				name: "Amb. Pastor Botsio Godsgift Appiah Bossman",
+				role: "Founder & Executive Director",
+				bio: "Founder of Turn To Christ Commission & Streets of Gold Youth Conference.",
+				imageUrl: "",
+			},
+		],
 	},
 
 	// --------------------------------------------------------------------

@@ -37,6 +37,7 @@ const VALUE_ICONS = [
 export default function About() {
 	const { content } = useSiteContent();
 	const about = content.about;
+	const leadership = content.leadership;
 
 	return (
 		<SiteLayout contentOverride={content}>
@@ -281,14 +282,14 @@ export default function About() {
 			<section id="leadership" className="py-24 bg-white">
 				<Container>
 					<SectionHeader
-						title={about.leadership.title}
-						subtitle={about.leadership.subtitle}
+						title={leadership.title}
+						subtitle={leadership.subtitle}
 					/>
 					<p className="text-gray-600 font-medium leading-relaxed max-w-3xl mx-auto text-center mb-12">
-						{about.leadership.text}
+						{leadership.text}
 					</p>
 					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{(about.leadership.profiles || []).map((p: any) => (
+						{(leadership.profiles || []).map((p: any) => (
 							<div
 								key={p.name}
 								className="bg-gray-50 rounded-[40px] p-10 text-center space-y-4 border border-gray-100"

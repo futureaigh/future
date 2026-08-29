@@ -21,6 +21,7 @@ import {
 	HeartHandshake,
 	Phone,
 	Handshake,
+	Scale,
 } from "lucide-react";
 import {
 	auth,
@@ -51,6 +52,7 @@ const SECTIONS = [
 	{ key: "seo", label: "SEO Metadata (Home)", icon: Search },
 	{ key: "home", label: "Home Page", icon: Home },
 	{ key: "about", label: "About Us", icon: Info },
+	{ key: "leadership", label: "Leadership & Governance", icon: Scale },
 	{ key: "whatWeDo", label: "What We Do", icon: BookOpen },
 	{ key: "impact", label: "Our Impact", icon: Target },
 	{ key: "future", label: "Our Future", icon: Flag },
