@@ -10,7 +10,7 @@ interface NavbarProps {
 
 export default function Navbar({ content }: NavbarProps) {
 	const { links, logoText, logoSub, ctaOrange, ctaBlue } = content.navbar || {};
-	const headerLogo = content.headerLogo || content.navbar?.logoUrl;
+	const headerLogo = content.branding?.headerLogo || content.navbar?.logoUrl;
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const { scrollY } = useScroll();
@@ -51,26 +51,17 @@ export default function Navbar({ content }: NavbarProps) {
 			className="fixed top-0 left-0 right-0 z-[100] h-20 transition-all duration-300"
 		>
 			<div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-				<Link to="/" className="flex items-center gap-3">
-					{headerLogo ? (
-						<div className="h-12 flex items-center justify-center overflow-hidden rounded-xl p-1">
-							<img
-								src={headerLogo}
-								className="h-full w-auto object-contain max-w-[180px]"
-								alt={logoText}
-							/>
-						</div>
-					) : (
-						<div
-							className={cn(
-								"h-12 w-12 rounded-xl flex items-center justify-center font-black text-sm",
-								isDark ? "bg-white/10 text-white" : "bg-blue-600 text-white",
-							)}
-						>
-							{logoSub?.slice(0, 2).toUpperCase() || "SO"}
-						</div>
-					)}
-				</Link>
+			<Link to="/" className="flex items-center gap-3">
+				{headerLogo && (
+					<div className="h-12 flex items-center justify-center overflow-hidden rounded-xl p-1">
+						<img
+							src={headerLogo}
+							className="h-full w-auto object-contain max-w-[180px]"
+							alt={logoText}
+						/>
+					</div>
+				)}
+			</Link>
 
 				{/* Desktop links */}
 				<div className="hidden lg:flex items-center gap-8">
