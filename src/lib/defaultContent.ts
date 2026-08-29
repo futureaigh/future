@@ -25,13 +25,6 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			{
 				label: "What We Do",
 				href: "/what-we-do",
-				children: [
-					{ label: "Conferences", href: "/what-we-do#conferences" },
-					{ label: "School Outreach", href: "/what-we-do#outreach" },
-					{ label: "Mentorship & Leadership", href: "/what-we-do#mentorship" },
-					{ label: "Skills & Enterprise", href: "/what-we-do#skills" },
-					{ label: "Christian Discipleship", href: "/what-we-do#discipleship" },
-				],
 			},
 			{ label: "Our Impact", href: "/impact" },
 			{
@@ -428,10 +421,6 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				"Represent TTC & SOGY at appropriate events",
 				"Contribute expertise, prayer, advocacy and strategic insight",
 			],
-		},
-		whyItMatters: {
-			title: "Why Our Work Matters",
-			text: "Young people face pressures relating to identity, faith, education, employment, technology, mental wellbeing, finances and relationships. TTC & SOGY responds by combining spiritual foundation with practical preparation, equipping young people, not limiting them.",
 		},
 	},
 

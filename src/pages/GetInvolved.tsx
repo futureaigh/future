@@ -199,25 +199,6 @@ export default function GetInvolved() {
 					</div>
 				</Container>
 			</section>
-
-			{/* Why it matters */}
-			<Section className="bg-white">
-				<Container>
-					<div className="bg-blue-50 rounded-[50px] p-12 md:p-20 text-center max-w-4xl mx-auto">
-						<h2 className="text-4xl font-black text-gray-900 tracking-tight mb-6">
-							{getInvolved.whyItMatters.title}
-						</h2>
-						<p className="text-xl text-gray-600 font-medium leading-relaxed">
-							{getInvolved.whyItMatters.text}
-						</p>
-						<div className="mt-8 flex justify-center">
-							<Button variant="blue">
-								Express Your Interest <ArrowRight className="w-5 h-5" />
-							</Button>
-						</div>
-					</div>
-				</Container>
-			</Section>
 		</SiteLayout>
 	);
 }
