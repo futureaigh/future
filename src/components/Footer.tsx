@@ -20,13 +20,13 @@ export default function Footer({ content }: FooterProps) {
 			<div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 relative z-10">
 				<div className="space-y-8 col-span-1 md:col-span-2">
 					<div className="flex items-center gap-3">
-						{content.footerLogo ? (
-							<div className="h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-1 shadow-sm">
-								<img
-									src={content.footerLogo}
-									className="h-full w-auto object-contain max-w-[180px]"
-									alt={navbar.logoText}
-								/>
+					{content.branding?.footerLogo ? (
+						<div className="h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-1 shadow-sm">
+							<img
+								src={content.branding?.footerLogo}
+								className="h-full w-auto object-contain max-w-[180px]"
+								alt={navbar.logoText}
+							/>
 							</div>
 						) : (
 							<div className="h-12 w-12 rounded-xl bg-blue-600 flex items-center justify-center font-black text-sm">
