@@ -59,23 +59,23 @@ export default function GetInvolved() {
 							</div>
 						<div className="flex flex-col gap-4">
 							{getInvolved.donate.qrImage ? (
-								<div className="mt-4 flex flex-col items-center gap-4 rounded-3xl bg-white/95 p-6">
+								<div className="mt-4 flex flex-col items-center gap-4">
 									<img
 										src={getInvolved.donate.qrImage}
 										alt="Donation QR code"
-										className="w-44 h-44 object-contain"
+										className="w-64 h-64 object-contain rounded-2xl bg-white p-2"
 									/>
-									<p className="text-sm font-bold text-blue-900">Scan to Donate</p>
+									<p className="text-sm font-bold text-blue-100">Scan to Donate</p>
 									{getInvolved.donate.donateUrl &&
 										getInvolved.donate.buttons?.[0] && (
 											<a
 												href={getInvolved.donate.donateUrl}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="flex items-center justify-center gap-3 px-10 py-4 w-full text-lg bg-blue-900 text-white hover:bg-blue-800 rounded-full font-black shadow-lg transition-all"
+												className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-base bg-white text-blue-700 hover:bg-blue-50 rounded-full font-bold shadow-lg transition-all"
 											>
 												{getInvolved.donate.buttons[0]}{" "}
-												<ArrowRight className="w-5 h-5" />
+												<ArrowRight className="w-4 h-4" />
 											</a>
 										)}
 								</div>
