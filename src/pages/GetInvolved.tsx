@@ -58,11 +58,36 @@ export default function GetInvolved() {
 								)}
 							</div>
 							<div className="flex flex-col gap-4">
-								{(getInvolved.donate.buttons || []).map((label: string) => (
-									<Button key={label} variant="white">
-										{label} <ArrowRight className="w-5 h-5" />
-									</Button>
-								))}
+								{(getInvolved.donate.buttons || [])
+									.filter(
+										(_: string, i: number) =>
+											i !== 0 && getInvolved.donate.donateUrl,
+									)
+									.map((label: string) => (
+										<Button key={label} variant="white">
+											{label} <ArrowRight className="w-5 h-5" />
+										</Button>
+									))}
+								{getInvolved.donate.donateUrl && getInvolved.donate.buttons?.[0] && (
+									<a
+										href={getInvolved.donate.donateUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="flex items-center justify-center gap-3 px-10 py-4 text-lg bg-white text-blue-900 hover:bg-blue-50 rounded-full font-black shadow-lg transition-all"
+									>
+										{getInvolved.donate.buttons[0]} <ArrowRight className="w-5 h-5" />
+									</a>
+								)}
+								{getInvolved.donate.qrImage && (
+									<div className="mt-4 flex flex-col items-center gap-3 rounded-3xl bg-white/95 p-6">
+										<img
+											src={getInvolved.donate.qrImage}
+											alt="Donation QR code"
+											className="w-44 h-44 object-contain"
+										/>
+										<p className="text-sm font-bold text-blue-900">Scan to Donate</p>
+									</div>
+								)}
 							</div>
 						</div>
 						<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>

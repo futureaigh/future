@@ -69,11 +69,6 @@ export default function Footer({ content }: FooterProps) {
 							{contact.email}
 						</span>
 					</div>
-					{contact.website && (
-						<p className="text-sm font-bold text-gray-300">
-							{contact.website}
-						</p>
-					)}
 				</div>
 
 				<div className="space-y-6">
