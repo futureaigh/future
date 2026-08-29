@@ -40,7 +40,7 @@ export default function News() {
 								updates on upcoming conferences, outreach and announcements.
 							</p>
 						</div>
-						<Link to="/contact">
+						<Link to="/contact" className="inline-flex">
 							<Button variant="primary">
 								Get Notified <ArrowRight className="w-5 h-5" />
 							</Button>

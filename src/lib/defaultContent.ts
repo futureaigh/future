@@ -290,7 +290,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "Impact Highlights",
 			list: [
 				{ label: "Young People Reached", value: "13,000+" },
-				{ label: "Decisions for Christ (2025)", value: "≈1,200" },
+				{ label: "Decisions for Christ (2025)", value: "1,200+" },
 				{ label: "Since", value: "2022" },
 				{ label: "Countries Connected (2026)", value: "8+" },
 			],

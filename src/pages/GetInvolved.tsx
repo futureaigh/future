@@ -185,7 +185,7 @@ export default function GetInvolved() {
 						<p className="text-xl text-gray-600 font-medium leading-relaxed">
 							{getInvolved.whyItMatters.text}
 						</p>
-						<div className="mt-8">
+						<div className="mt-8 flex justify-center">
 							<Button variant="blue">
 								Express Your Interest <ArrowRight className="w-5 h-5" />
 							</Button>

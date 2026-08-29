@@ -189,7 +189,7 @@ export default function Home() {
 							<p className="text-xl md:text-2xl font-bold leading-relaxed opacity-90 max-w-4xl mx-auto">
 								{home.invitation.text}
 							</p>
-							<div className="pt-4">
+							<div className="pt-4 flex justify-center">
 								<Link to="/get-involved">
 									<Button variant="white">
 										Join Our Global Community <ArrowRight className="w-5 h-5" />

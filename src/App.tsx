@@ -11,6 +11,7 @@ import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import News from './pages/News';
 import Admin from './pages/Admin';
+import SiteHead from './components/SiteHead';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
+        <SiteHead />
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
