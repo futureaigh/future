@@ -153,7 +153,6 @@ export default function GetInvolved() {
 									{getInvolved.volunteer.note}
 								</p>
 							)}
-							<Button variant="primary">{getInvolved.volunteer.cta}</Button>
 						</div>
 						<div className="bg-gray-50 rounded-[50px] p-12">
 							<ContactForm source="volunteer" categories={[
