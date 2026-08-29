@@ -383,7 +383,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			text: "Every donation contributes to the delivery and development of youth-focused activities. Depending on current priorities, support may help fund school and community outreach, youth conferences, training materials, mentorship, technology and programme quality.",
 			buttons: ["Donate Now", "Become a Monthly Partner", "Sponsor a Project"],
 			note: "Donations will be used in accordance with the charity's objects, applicable law and any properly accepted donor restriction.",
-			qrImage: "",
+			qrImage: "/media/site-content/ttc.jpg",
 			donateUrl: "https://www.paypal.com/ncp/payment/F3PX9BRXREPXW",
 		},
 		partner: {
