@@ -72,7 +72,7 @@ export default function GetInvolved() {
 												href={getInvolved.donate.donateUrl}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="flex items-center justify-center gap-2 px-8 py-3.5 w-full text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-bold shadow-xl transition-all"
+												className="flex items-center justify-center gap-2 px-8 py-3 text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-bold shadow-xl transition-all"
 											>
 												{getInvolved.donate.buttons[0]}{" "}
 												<ArrowRight className="w-4 h-4" />
