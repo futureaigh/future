@@ -63,7 +63,7 @@ export default function GetInvolved() {
 									<img
 										src={getInvolved.donate.qrImage}
 										alt="Donation QR code"
-										className="w-64 h-64 object-contain rounded-2xl bg-white p-2"
+										className="w-80 h-80 object-contain rounded-2xl bg-white p-4"
 									/>
 									<p className="text-sm font-bold text-blue-100">Scan to Donate</p>
 									{getInvolved.donate.donateUrl &&
