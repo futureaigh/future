@@ -1,12 +1,6 @@
 import { Link } from "react-router-dom";
-import {
-	Twitter,
-	Github,
-	Linkedin,
-	Mail,
-	Phone,
-	Heart,
-} from "lucide-react";
+import { Twitter, Github, Linkedin, Mail, Phone, Heart } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 interface FooterProps {
 	content: any;
@@ -20,13 +14,13 @@ export default function Footer({ content }: FooterProps) {
 			<div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 relative z-10">
 				<div className="space-y-8 col-span-1 md:col-span-2">
 					<div className="flex items-center gap-3">
-					{content.branding?.footerLogo ? (
-						<div className="h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-1 shadow-sm">
-							<img
-								src={content.branding?.footerLogo}
-								className="h-full w-auto object-contain max-w-[180px]"
-								alt={navbar.logoText}
-							/>
+						{content.branding?.footerLogo ? (
+							<div className="h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-1 shadow-sm">
+								<img
+									src={content.branding?.footerLogo}
+									className="h-full w-auto object-contain max-w-[180px]"
+									alt={navbar.logoText}
+								/>
 							</div>
 						) : (
 							<div className="h-12 w-12 rounded-xl bg-blue-600 flex items-center justify-center font-black text-sm">
@@ -77,14 +71,17 @@ export default function Footer({ content }: FooterProps) {
 					</h4>
 					<div className="space-y-4">
 						{(contact.phones || []).map((phone: any) => (
-							<div key={phone.label} className="flex gap-3">
-								<Phone className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+							<div key={phone.value} className="flex gap-3">
+								<div className="flex flex-col gap-2 mt-0.5">
+									<Phone className="w-4 h-4 text-blue-500 flex-shrink-0" />
+									<FaWhatsapp className="w-4 h-4 text-green-500 flex-shrink-0" />
+								</div>
 								<div className="flex flex-col">
 									<span className="text-sm font-bold text-gray-300">
 										{phone.value}
 									</span>
 									<span className="text-[10px] font-bold text-gray-500 uppercase">
-										({phone.label})
+										{phone.label}
 									</span>
 								</div>
 							</div>
@@ -97,7 +94,10 @@ export default function Footer({ content }: FooterProps) {
 				<p className="text-xs font-bold text-gray-500">
 					© {new Date().getFullYear()} {navbar.logoText}. All rights reserved.
 					{shared.charityNumber && (
-						<span className="text-gray-600"> Charity No. {shared.charityNumber}</span>
+						<span className="text-gray-600">
+							{" "}
+							Charity No. {shared.charityNumber}
+						</span>
 					)}
 				</p>
 				<div className="flex items-center gap-6">

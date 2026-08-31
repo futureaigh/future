@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, Mail } from "lucide-react";
+import { ChevronDown, Mail, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import SiteLayout from "@/layouts/SiteLayout";
 import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
@@ -75,29 +76,41 @@ export default function Contact() {
 
 					<div className="mt-16 grid md:grid-cols-2 gap-8">
 						<div className="bg-gray-50 rounded-[40px] p-10 space-y-6">
-							<h3 className="text-xl font-black text-gray-900">Contact Details</h3>
+							<h3 className="text-xl font-black text-gray-900">
+								Contact Details
+							</h3>
 							<div className="flex items-center gap-3">
 								<Mail className="w-4 h-4 text-blue-600" />
 								<span className="font-bold text-gray-700">{contact.email}</span>
 							</div>
 							<div className="flex items-center gap-3">
 								<Mail className="w-4 h-4 text-blue-600" />
-								<span className="font-bold text-gray-700">{contact.website}</span>
+								<span className="font-bold text-gray-700">
+									{contact.website}
+								</span>
 							</div>
 							<p className="text-sm text-gray-500 font-medium">
-								Registered charity: {contact.charityName}{" "}
-								(Charity No. {contact.charityNumber})
+								Registered charity: {contact.charityName} (Charity No.{" "}
+								{contact.charityNumber})
 							</p>
 						</div>
 						<div className="bg-gray-50 rounded-[40px] p-10">
-							<h3 className="text-xl font-black text-gray-900 mb-6">Phone Numbers</h3>
+							<h3 className="text-xl font-black text-gray-900 mb-6">
+								Phone Numbers
+							</h3>
 							<div className="space-y-4">
 								{(contact.phones || []).map((phone: any) => (
-									<div key={phone.label}>
-										<span className="text-xs font-bold text-gray-400 uppercase">
-											{phone.label}
-										</span>
-										<p className="font-bold text-gray-700">{phone.value}</p>
+									<div key={phone.value} className="flex items-start gap-3">
+										<div className="flex flex-col gap-2 mt-0.5">
+											<Phone className="w-4 h-4 text-blue-600 flex-shrink-0" />
+											<FaWhatsapp className="w-4 h-4 text-green-600 flex-shrink-0" />
+										</div>
+										<div>
+											<span className="text-xs font-bold text-gray-400 uppercase">
+												{phone.label}
+											</span>
+											<p className="font-bold text-gray-700">{phone.value}</p>
+										</div>
 									</div>
 								))}
 							</div>

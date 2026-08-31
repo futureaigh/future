@@ -72,11 +72,17 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// --------------------------------------------------------------------
 	home: {
 		hero: {
-			title: "Raising a Generation of Purposeful, Skilled and Christ-Centred Global Leaders",
-			quote: "“Let no one despise your youth, but be an example…” 1 Timothy 4:12",
+			title:
+				"Raising a Generation of Purposeful, Skilled and Christ-Centred Global Leaders",
+			quote:
+				"“Let no one despise your youth, but be an example…” 1 Timothy 4:12",
 			intro:
 				"Turn To Christ Commission and Streets of Gold Youth Conference (TTC & SOGY) is a Christian youth development charity committed to transforming young lives through faith, education, leadership, mentorship, wellbeing, creativity and practical skills.",
-			ctaButtons: ["Discover Our Work", "Partner With Us", "Support a Young Person"],
+			ctaButtons: [
+				"Discover Our Work",
+				"Partner With Us",
+				"Support a Young Person",
+			],
 			imageUrl: M("1787955708700-group.jpg"),
 		},
 		intro: {
@@ -119,11 +125,21 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		},
 		getInvolved: {
 			title: "Get Involved",
-			subtitle: "Partner with us in transforming the lives of young people for the glory of God.",
+			subtitle:
+				"Partner with us in transforming the lives of young people for the glory of God.",
 			list: [
-				{ title: "Attend Our Events", text: "Join us at campus programs, conferences and revival meetings across High Schools and Tertiaries." },
-				{ title: "Volunteer Your Time & Skills", text: "Provide knowledgeable speakers, facilitators, or subject matter experts to enrich our sessions." },
-				{ title: "Support a Young Person", text: "Offer scholarships, mentorship or financial aid to deserving students who demonstrate exceptional potential." },
+				{
+					title: "Attend Our Events",
+					text: "Join us at campus programs, conferences and revival meetings across High Schools and Tertiaries.",
+				},
+				{
+					title: "Volunteer Your Time & Skills",
+					text: "Provide knowledgeable speakers, facilitators, or subject matter experts to enrich our sessions.",
+				},
+				{
+					title: "Support a Young Person",
+					text: "Offer scholarships, mentorship or financial aid to deserving students who demonstrate exceptional potential.",
+				},
 			],
 		},
 	},
@@ -163,14 +179,39 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		},
 		history: {
 			title: "Our History",
-			subtitle: "From a vision birthed in 2020 to an international youth movement.",
+			subtitle:
+				"From a vision birthed in 2020 to an international youth movement.",
 			list: [
-				{ date: "2020", title: "The Birth of the Vision", text: "The vision was birthed on 21 November 2020 through Acts 16:31, with a mandate to lead people and households to Christ." },
-				{ date: "2021", title: "Building the Foundation", text: "The early period focused on prayer, vision development and establishing the foundations for a youth movement." },
-				{ date: "2022", title: "Public Launch in Ghana", text: "TTC & SOGY was publicly launched on 22 October 2022 at Accra High School, hosting its inaugural Students Conference at the same school." },
-				{ date: "2023-2024", title: "Expansion Across Schools & Communities", text: "Work expanded through school and community engagement across multiple Ghanaian institutions." },
-				{ date: "2025", title: "Growing Impact", text: "The Students Campus Conference on 1 November 2025 at PRESEC Mampong carried the theme “The King of Glory”, reporting approximately 1,200 decisions for Christ." },
-				{ date: "2026", title: "Five Years of Grace and Impact", text: "The Global Youth Empowerment Conference on 15 August 2026 ran under “Defy Despise; Live With Purpose”, connecting youth communities across Ghana, Zambia, the United States, the United Kingdom, Jamaica, Antigua and Barbuda, Uganda and India." },
+				{
+					date: "2020",
+					title: "The Birth of the Vision",
+					text: "The vision was birthed on 21 November 2020 through Acts 16:31, with a mandate to lead people and households to Christ.",
+				},
+				{
+					date: "2021",
+					title: "Building the Foundation",
+					text: "The early period focused on prayer, vision development and establishing the foundations for a youth movement.",
+				},
+				{
+					date: "2022",
+					title: "Public Launch in Ghana",
+					text: "TTC & SOGY was publicly launched on 22 October 2022 at Accra High School, hosting its inaugural Students Conference at the same school.",
+				},
+				{
+					date: "2023-2024",
+					title: "Expansion Across Schools & Communities",
+					text: "Work expanded through school and community engagement across multiple Ghanaian institutions.",
+				},
+				{
+					date: "2025",
+					title: "Growing Impact",
+					text: "The Students Campus Conference on 1 November 2025 at PRESEC Mampong carried the theme “The King of Glory”, reporting approximately 1,200 decisions for Christ.",
+				},
+				{
+					date: "2026",
+					title: "Five Years of Grace and Impact",
+					text: "The Global Youth Empowerment Conference on 15 August 2026 ran under “Defy Despise; Live With Purpose”, connecting youth communities across Ghana, Zambia, the United States, the United Kingdom, Jamaica, Antigua and Barbuda, Uganda and India.",
+				},
 			],
 		},
 		vision: {
@@ -196,16 +237,46 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "Our Core Values",
 			subtitle: "The principles that guide everything we do.",
 			list: [
-				{ title: "Christ-Centred Faith", text: "Jesus Christ is the foundation of our identity, message and service." },
-				{ title: "Integrity", text: "We act honestly, responsibly and transparently." },
-				{ title: "Excellence", text: "We pursue high standards and responsible stewardship of every opportunity." },
-				{ title: "Compassion", text: "We respond to young people's needs with empathy, dignity and practical care." },
-				{ title: "Empowerment", text: "We equip young people to think, lead, create, serve and build sustainable futures." },
-				{ title: "Inclusion and Respect", text: "We welcome people from diverse nations and backgrounds while remaining faithful to our Christian foundation." },
-				{ title: "Innovation and Creativity", text: "We encourage bold thinking and responsible use of technology." },
-				{ title: "Service and Social Responsibility", text: "We teach that leadership is service to families, communities and nations." },
-				{ title: "Partnership", text: "We believe lasting transformation comes through cooperation." },
-				{ title: "Accountability and Stewardship", text: "We measure our work responsibly and remain accountable to those we serve." },
+				{
+					title: "Christ-Centred Faith",
+					text: "Jesus Christ is the foundation of our identity, message and service.",
+				},
+				{
+					title: "Integrity",
+					text: "We act honestly, responsibly and transparently.",
+				},
+				{
+					title: "Excellence",
+					text: "We pursue high standards and responsible stewardship of every opportunity.",
+				},
+				{
+					title: "Compassion",
+					text: "We respond to young people's needs with empathy, dignity and practical care.",
+				},
+				{
+					title: "Empowerment",
+					text: "We equip young people to think, lead, create, serve and build sustainable futures.",
+				},
+				{
+					title: "Inclusion and Respect",
+					text: "We welcome people from diverse nations and backgrounds while remaining faithful to our Christian foundation.",
+				},
+				{
+					title: "Innovation and Creativity",
+					text: "We encourage bold thinking and responsible use of technology.",
+				},
+				{
+					title: "Service and Social Responsibility",
+					text: "We teach that leadership is service to families, communities and nations.",
+				},
+				{
+					title: "Partnership",
+					text: "We believe lasting transformation comes through cooperation.",
+				},
+				{
+					title: "Accountability and Stewardship",
+					text: "We measure our work responsibly and remain accountable to those we serve.",
+				},
 			],
 		},
 	},
@@ -215,7 +286,8 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// --------------------------------------------------------------------
 	leadership: {
 		title: "Leadership and Governance",
-		subtitle: "Turn To Christ Crusade is governed by its trustees and led by its executive team.",
+		subtitle:
+			"Turn To Christ Crusade is governed by its trustees and led by its executive team.",
 		text: "The trustees carry responsibility for the charity's strategic oversight, legal compliance, financial stewardship, safeguarding and accountability. The founder provides executive leadership for the delivery and development of the vision, while remaining accountable to the trustee body.",
 		profiles: [
 			{
@@ -239,25 +311,96 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "Our Programmes & Projects",
 			subtitle: "Fourteen ways we invest in the whole young person.",
 			list: [
-				{ title: "Streets of Gold Youth Conference", category: "conferences", text: "Our flagship youth empowerment platform bringing together young people, leaders, educators and mentors for teaching, discussion, prayer and practical development.", imageUrl: M("1787955828410-gos_preach.jpg") },
-				{ title: "Students Campus Conference", category: "conferences", text: "Taking the mission directly to students through teaching, worship, mentoring and interactive learning.", imageUrl: M("1787955708700-group.jpg") },
-				{ title: "School Outreach Programme", category: "outreach", text: "Age-appropriate Christian encouragement and holistic development sessions in schools.", imageUrl: M("1787955736423-loc.jpg") },
-				{ title: "Campus Student Ambassadors Programme", category: "outreach", text: "Representing and promoting the vision within schools, mobilising students and modelling positive conduct.", imageUrl: M("1787955889158-why.jpg") },
-				{ title: "Global Ambassadors Programme", category: "mentorship", text: "Respected leaders and professionals who advance the mission through influence, networks and expertise.", imageUrl: M("1787956164029-why.jpg") },
-				{ title: "Leadership and Mentorship Programme", category: "mentorship", text: "Connecting young people with trusted leaders and positive role models.", imageUrl: M("1787955859808-ment.jpg") },
-				{ title: "Entrepreneurship and Financial Intelligence", category: "skills", text: "Foundational concepts in enterprise, problem-solving, money management and responsible stewardship.", imageUrl: M("1787955837490-Ent.jpg") },
-				{ title: "Critical Thinking and Creativity", category: "skills", text: "Learning to question, analyse, solve problems and communicate with wisdom and imagination.", imageUrl: M("1787955849165-Eff.jpg") },
-				{ title: "AI, IT and Digital Skills Development", category: "skills", text: "Preparing young people for a technology-driven future through digital confidence and online safety.", imageUrl: M("1787955849165-Eff.jpg") },
-				{ title: "Health and Wellbeing", category: "skills", text: "Promoting healthy choices and awareness of physical, mental, emotional and spiritual wellbeing.", imageUrl: M("1787955853356-Health.jpg") },
-				{ title: "Youth Social Responsibility", category: "skills", text: "Encouraging service, compassion, citizenship and practical community action.", imageUrl: M("1787955889158-why.jpg") },
-				{ title: "Word Dynamics and Christian Discipleship", category: "discipleship", text: "Scripture-based teaching, prayer, worship and mentoring toward a personal relationship with Christ.", imageUrl: M("1787955828410-gos_preach.jpg") },
-				{ title: "Effective Learning and Career Guidance", category: "discipleship", text: "Strengthening study habits, exploring options and making informed decisions about the future.", imageUrl: M("1787955849165-Eff.jpg") },
-				{ title: "Volunteers and Prayer Network", category: "discipleship", text: "Volunteers contributing skills, time and prayer across outreach, events and programme delivery.", imageUrl: M("1787955859808-ment.jpg") },
+				{
+					title: "Streets of Gold Youth Conference",
+					category: "conferences",
+					text: "Our flagship youth empowerment platform bringing together young people, leaders, educators and mentors for teaching, discussion, prayer and practical development.",
+					imageUrl: M("1787955828410-gos_preach.jpg"),
+				},
+				{
+					title: "Students Campus Conference",
+					category: "conferences",
+					text: "Taking the mission directly to students through teaching, worship, mentoring and interactive learning.",
+					imageUrl: M("1787955708700-group.jpg"),
+				},
+				{
+					title: "School Outreach Programme",
+					category: "outreach",
+					text: "Age-appropriate Christian encouragement and holistic development sessions in schools.",
+					imageUrl: M("1787955736423-loc.jpg"),
+				},
+				{
+					title: "Campus Student Ambassadors Programme",
+					category: "outreach",
+					text: "Representing and promoting the vision within schools, mobilising students and modelling positive conduct.",
+					imageUrl: M("1787955889158-why.jpg"),
+				},
+				{
+					title: "Global Ambassadors Programme",
+					category: "mentorship",
+					text: "Respected leaders and professionals who advance the mission through influence, networks and expertise.",
+					imageUrl: M("1787956164029-why.jpg"),
+				},
+				{
+					title: "Leadership and Mentorship Programme",
+					category: "mentorship",
+					text: "Connecting young people with trusted leaders and positive role models.",
+					imageUrl: M("1787955859808-ment.jpg"),
+				},
+				{
+					title: "Entrepreneurship and Financial Intelligence",
+					category: "skills",
+					text: "Foundational concepts in enterprise, problem-solving, money management and responsible stewardship.",
+					imageUrl: M("1787955837490-Ent.jpg"),
+				},
+				{
+					title: "Critical Thinking and Creativity",
+					category: "skills",
+					text: "Learning to question, analyse, solve problems and communicate with wisdom and imagination.",
+					imageUrl: M("1787955849165-Eff.jpg"),
+				},
+				{
+					title: "AI, IT and Digital Skills Development",
+					category: "skills",
+					text: "Preparing young people for a technology-driven future through digital confidence and online safety.",
+					imageUrl: M("1787955849165-Eff.jpg"),
+				},
+				{
+					title: "Health and Wellbeing",
+					category: "skills",
+					text: "Promoting healthy choices and awareness of physical, mental, emotional and spiritual wellbeing.",
+					imageUrl: M("1787955853356-Health.jpg"),
+				},
+				{
+					title: "Youth Social Responsibility",
+					category: "skills",
+					text: "Encouraging service, compassion, citizenship and practical community action.",
+					imageUrl: M("1787955889158-why.jpg"),
+				},
+				{
+					title: "Word Dynamics and Christian Discipleship",
+					category: "discipleship",
+					text: "Scripture-based teaching, prayer, worship and mentoring toward a personal relationship with Christ.",
+					imageUrl: M("1787955828410-gos_preach.jpg"),
+				},
+				{
+					title: "Effective Learning and Career Guidance",
+					category: "discipleship",
+					text: "Strengthening study habits, exploring options and making informed decisions about the future.",
+					imageUrl: M("1787955849165-Eff.jpg"),
+				},
+				{
+					title: "Volunteers and Prayer Network",
+					category: "discipleship",
+					text: "Volunteers contributing skills, time and prayer across outreach, events and programme delivery.",
+					imageUrl: M("1787955859808-ment.jpg"),
+				},
 			],
 		},
 		learning: {
 			title: "Our Learning Framework",
-			subtitle: "A holistic curriculum designed to develop the whole young person.",
+			subtitle:
+				"A holistic curriculum designed to develop the whole young person.",
 			list: [
 				"Word Dynamics and Christian Discipleship",
 				"Leadership and Mentorship",
@@ -296,11 +439,26 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			title: "The Change We Seek",
 			subtitle: "Measurable and lasting change in five areas.",
 			list: [
-				{ title: "Spiritual Growth", text: "Young people encounter Christ, understand Scripture and develop Christian character." },
-				{ title: "Personal Development", text: "Young people gain confidence, self-awareness, resilience and a clear sense of purpose." },
-				{ title: "Knowledge and Skills", text: "Young people acquire practical, academic, entrepreneurial, financial and digital capabilities." },
-				{ title: "Leadership and Service", text: "Young people take responsibility, lead ethically and contribute to their communities." },
-				{ title: "Opportunity and Progression", text: "Young people access mentors, networks, training and pathways that support education and employment." },
+				{
+					title: "Spiritual Growth",
+					text: "Young people encounter Christ, understand Scripture and develop Christian character.",
+				},
+				{
+					title: "Personal Development",
+					text: "Young people gain confidence, self-awareness, resilience and a clear sense of purpose.",
+				},
+				{
+					title: "Knowledge and Skills",
+					text: "Young people acquire practical, academic, entrepreneurial, financial and digital capabilities.",
+				},
+				{
+					title: "Leadership and Service",
+					text: "Young people take responsibility, lead ethically and contribute to their communities.",
+				},
+				{
+					title: "Opportunity and Progression",
+					text: "Young people access mentors, networks, training and pathways that support education and employment.",
+				},
 			],
 		},
 		additional: {
@@ -335,7 +493,8 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				"Personal and Career Development",
 				"Word Dynamics and Christian Discipleship",
 			],
-			outcome: "We aspire to build an institution that equips ethical, innovative and compassionate leaders for ministry, business, education, technology, public service and community transformation.",
+			outcome:
+				"We aspire to build an institution that equips ethical, innovative and compassionate leaders for ministry, business, education, technology, public service and community transformation.",
 		},
 		talentHubs: {
 			title: "TTC & SOGY Talent Hubs",
@@ -352,8 +511,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				"Community service and social-action projects",
 				"Access to positive role models, networks and opportunities",
 			],
-			why:
-				"Conferences and online learning can inspire transformation; sustained community support helps embed it. Talent Hubs enable longer-term relationships with young people, track development and connect learning to real opportunities.",
+			why: "Conferences and online learning can inspire transformation; sustained community support helps embed it. Talent Hubs enable longer-term relationships with young people, track development and connect learning to real opportunities.",
 		},
 		threeYear: {
 			title: "Our Three-Year Ambition",
@@ -433,7 +591,8 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// --------------------------------------------------------------------
 	contact: {
 		title: "Let Us Build the Future Together",
-		subtitle: "We would be delighted to hear from young people, parents, schools, churches, community organisations, volunteers, donors, corporate partners and institutions that share our passion for youth transformation.",
+		subtitle:
+			"We would be delighted to hear from young people, parents, schools, churches, community organisations, volunteers, donors, corporate partners and institutions that share our passion for youth transformation.",
 		categories: [
 			"General Enquiry",
 			"School or Church Partnership",
@@ -443,13 +602,8 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			"Media and Speaking Enquiry",
 			"Safeguarding Concern",
 		],
-		email: "turntochristcrusade@gmail.com",
-		phones: [
-			{ label: "Holland", value: "+31 6 34299126" },
-			{ label: "UK", value: "+44 7568 570759" },
-			{ label: "GH", value: "+233 24 046 0783" },
-			{ label: "USA", value: "+1 (432) 232-8931" },
-		],
+		email: "admin@ttccommission.org",
+		phones: [{ label: "Tel & WhatsApp", value: "+44 7437 927289" }],
 		website: "sogyconf.org",
 		charityName: "Turn To Christ Crusade",
 		charityNumber: "1212685",
@@ -458,14 +612,38 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	faq: {
 		title: "Frequently Asked Questions",
 		qa: [
-			{ q: "Is TTC & SOGY a registered charity?", a: "Yes. TTC & SOGY operates under the registered legal name Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685." },
-			{ q: "Is TTC & SOGY only for Christians?", a: "TTC & SOGY is founded on the Christian faith and its programmes reflect Christian values and teaching. We are committed to serving young people with dignity and respect and to creating welcoming, internationally inclusive environments." },
-			{ q: "Where do you work?", a: "Our principal programme history is in Ghana and the United Kingdom, with international relationships and participation involving other countries. Expansion is undertaken progressively through appropriate local partnerships and safeguarding arrangements." },
-			{ q: "What age group do you support?", a: "Our programmes serve young people, students and emerging young leaders. The precise age range may vary by programme, institution and safeguarding requirements." },
-			{ q: "How can my school or church become involved?", a: "Schools, churches and community organisations can contact us to discuss outreach, workshops, conferences, mentoring, youth ambassador opportunities or strategic partnership." },
-			{ q: "How can I become a volunteer or mentor?", a: "Complete the expression-of-interest form on our website. Suitable applicants may be invited to a conversation and required to complete references, training and safeguarding checks appropriate to the role." },
-			{ q: "How can I support financially?", a: "You can make a one-off gift, become a monthly partner, sponsor a project or discuss a strategic partnership with our team." },
-			{ q: "Are the Talent Hubs and TTC Global Institute already operating?", a: "They form part of our medium- and long-term development vision. Their implementation will depend on funding, governance, facilities, staffing, partnerships and relevant regulatory or accreditation requirements." },
+			{
+				q: "Is TTC & SOGY a registered charity?",
+				a: "Yes. TTC & SOGY operates under the registered legal name Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685.",
+			},
+			{
+				q: "Is TTC & SOGY only for Christians?",
+				a: "TTC & SOGY is founded on the Christian faith and its programmes reflect Christian values and teaching. We are committed to serving young people with dignity and respect and to creating welcoming, internationally inclusive environments.",
+			},
+			{
+				q: "Where do you work?",
+				a: "Our principal programme history is in Ghana and the United Kingdom, with international relationships and participation involving other countries. Expansion is undertaken progressively through appropriate local partnerships and safeguarding arrangements.",
+			},
+			{
+				q: "What age group do you support?",
+				a: "Our programmes serve young people, students and emerging young leaders. The precise age range may vary by programme, institution and safeguarding requirements.",
+			},
+			{
+				q: "How can my school or church become involved?",
+				a: "Schools, churches and community organisations can contact us to discuss outreach, workshops, conferences, mentoring, youth ambassador opportunities or strategic partnership.",
+			},
+			{
+				q: "How can I become a volunteer or mentor?",
+				a: "Complete the expression-of-interest form on our website. Suitable applicants may be invited to a conversation and required to complete references, training and safeguarding checks appropriate to the role.",
+			},
+			{
+				q: "How can I support financially?",
+				a: "You can make a one-off gift, become a monthly partner, sponsor a project or discuss a strategic partnership with our team.",
+			},
+			{
+				q: "Are the Talent Hubs and TTC Global Institute already operating?",
+				a: "They form part of our medium- and long-term development vision. Their implementation will depend on funding, governance, facilities, staffing, partnerships and relevant regulatory or accreditation requirements.",
+			},
 		],
 	},
 
