@@ -3,10 +3,7 @@ import { Mail, Phone, Heart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import {
 	FaFacebook,
-	FaInstagram,
-	FaXTwitter,
 	FaYoutube,
-	FaTiktok,
 } from "react-icons/fa6";
 
 interface FooterProps {
@@ -48,16 +45,14 @@ export default function Footer({ content }: FooterProps) {
 					</p>
 					<div className="flex items-center gap-4">
 						{[
-							/* Icons set later via admin */
-							{ Icon: FaFacebook, name: "Facebook" },
-							{ Icon: FaInstagram, name: "Instagram" },
-							{ Icon: FaXTwitter, name: "X" },
-							{ Icon: FaYoutube, name: "YouTube" },
-							{ Icon: FaTiktok, name: "TikTok" },
-						].map(({ Icon, name }) => (
+							{ Icon: FaFacebook, name: "Facebook", href: "https://www.facebook.com/profile.php?id=61552678809609" },
+							{ Icon: FaYoutube, name: "YouTube", href: "https://youtube.com/@turntochristcommission?si=Qafb_fDqkPKl2Eog" },
+						].map(({ Icon, name, href }) => (
 							<a
 								key={name}
-								href="#"
+								href={href}
+								target="_blank"
+								rel="noopener noreferrer"
 								className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/10 transition-colors"
 								aria-label={name}
 							>
