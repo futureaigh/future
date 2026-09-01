@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, Heart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import {
-	FaFacebook,
-	FaYoutube,
-} from "react-icons/fa6";
+import { FaFacebook, FaYoutube } from "react-icons/fa6";
 
 interface FooterProps {
 	content: any;
@@ -45,8 +42,16 @@ export default function Footer({ content }: FooterProps) {
 					</p>
 					<div className="flex items-center gap-4">
 						{[
-							{ Icon: FaFacebook, name: "Facebook", href: "https://www.facebook.com/profile.php?id=61552678809609" },
-							{ Icon: FaYoutube, name: "YouTube", href: "https://youtube.com/@turntochristcommission?si=Qafb_fDqkPKl2Eog" },
+							{
+								Icon: FaFacebook,
+								name: "Facebook",
+								href: "https://www.facebook.com/profile.php?id=61552678809609",
+							},
+							{
+								Icon: FaYoutube,
+								name: "YouTube",
+								href: "https://youtube.com/@turntochristcommission?si=Qafb_fDqkPKl2Eog",
+							},
 						].map(({ Icon, name, href }) => (
 							<a
 								key={name}
@@ -59,6 +64,14 @@ export default function Footer({ content }: FooterProps) {
 								<Icon className="w-4 h-4 text-gray-400" />
 							</a>
 						))}
+						<a
+							href="https://www.sogyconf.org"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="mt-4 block text-sm text-gray-400 font-medium hover:text-white transition-colors"
+						>
+							www.sogyconf.org
+						</a>
 					</div>
 				</div>
 
