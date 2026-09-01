@@ -603,6 +603,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			"Safeguarding Concern",
 		],
 		email: "admin@ttccommission.org",
+		conferenceEmail: "Conference@ttccommission.org",
 		phones: [{ label: "Tel & WhatsApp", value: "+44 7437 927289" }],
 		website: "admin@sogyconf.org",
 		charityName: "Turn To Christ Crusade",

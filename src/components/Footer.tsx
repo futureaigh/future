@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, Heart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FaFacebook, FaYoutube } from "react-icons/fa6";
+import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa6";
 
 interface FooterProps {
 	content: any;
@@ -51,6 +51,11 @@ export default function Footer({ content }: FooterProps) {
 								Icon: FaYoutube,
 								name: "YouTube",
 								href: "https://youtube.com/@turntochristcommission?si=Qafb_fDqkPKl2Eog",
+							},
+							{
+								Icon: FaTiktok,
+								name: "TikTok",
+								href: "https://www.tiktok.com/@streets.of.gold.csogy?_r=1",
 							},
 						].map(({ Icon, name, href }) => (
 							<a
