@@ -86,7 +86,7 @@ export default function Footer({ content }: FooterProps) {
 					<div className="space-y-4">
 						{(contact.phones || []).map((phone: any) => (
 							<div key={phone.value} className="flex gap-3">
-								<div className="flex flex-col gap-2 mt-0.5">
+								<div className="flex gap-3 mt-1">
 									<Phone className="w-4 h-4 text-blue-500 flex-shrink-0" />
 									<FaWhatsapp className="w-4 h-4 text-green-500 flex-shrink-0" />
 								</div>
