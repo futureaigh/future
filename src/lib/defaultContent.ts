@@ -604,7 +604,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		],
 		email: "admin@ttccommission.org",
 		phones: [{ label: "Tel & WhatsApp", value: "+44 7437 927289" }],
-		website: "sogyconf.org",
+		website: "admin@sogyconf.org",
 		charityName: "Turn To Christ Crusade",
 		charityNumber: "1212685",
 	},
