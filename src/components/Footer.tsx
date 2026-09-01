@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
-import { Twitter, Github, Linkedin, Mail, Phone, Heart } from "lucide-react";
+import { Mail, Phone, Heart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import {
+	FaFacebook,
+	FaInstagram,
+	FaXTwitter,
+	FaYoutube,
+	FaTiktok,
+} from "react-icons/fa6";
 
 interface FooterProps {
 	content: any;
@@ -40,12 +47,18 @@ export default function Footer({ content }: FooterProps) {
 						{shared.footerText}
 					</p>
 					<div className="flex items-center gap-4">
-						{[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
+						{[/* Icons set later via admin */
+							{ Icon: FaFacebook, name: "Facebook" },
+							{ Icon: FaInstagram, name: "Instagram" },
+							{ Icon: FaXTwitter, name: "X" },
+							{ Icon: FaYoutube, name: "YouTube" },
+							{ Icon: FaTiktok, name: "TikTok" },
+						].map(({ Icon, name }) => (
 							<a
-								key={i}
+								key={name}
 								href="#"
 								className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/10 transition-colors"
-								aria-label="Social link"
+								aria-label={name}
 							>
 								<Icon className="w-4 h-4 text-gray-400" />
 							</a>
