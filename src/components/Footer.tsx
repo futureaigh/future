@@ -90,6 +90,12 @@ export default function Footer({ content }: FooterProps) {
 							{contact.email}
 						</span>
 					</div>
+					<div className="flex items-center gap-3">
+						<Mail className="w-4 h-4 text-blue-500" />
+						<span className="text-sm font-bold text-gray-300">
+							{contact.conferenceEmail}
+						</span>
+					</div>
 				</div>
 
 				<div className="space-y-6">
