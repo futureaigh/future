@@ -47,7 +47,8 @@ export default function Footer({ content }: FooterProps) {
 						{shared.footerText}
 					</p>
 					<div className="flex items-center gap-4">
-						{[/* Icons set later via admin */
+						{[
+							/* Icons set later via admin */
 							{ Icon: FaFacebook, name: "Facebook" },
 							{ Icon: FaInstagram, name: "Instagram" },
 							{ Icon: FaXTwitter, name: "X" },
