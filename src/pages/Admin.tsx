@@ -36,6 +36,7 @@ import { DEFAULT_CONTENT } from "@/lib/defaultContent";
 import { cn } from "@/lib/utils";
 import SectionEditor from "@/components/admin/SectionEditor";
 import GalleryManager from "@/components/admin/GalleryManager";
+import ProgramsManager from "@/components/admin/ProgramsManager";
 import { toast } from "sonner";
 
 const INTEREST_LABELS = {
@@ -478,18 +479,58 @@ export default function Admin() {
 									{openSection === section.key && (
 										<div className="px-8 pb-8 border-t border-gray-50 animate-in slide-in-from-top-4 duration-300">
 											<div className="pt-8">
-												<SectionEditor
-													key={section.key}
-													sectionKey={section.key}
-													data={getSectionData(section.key)}
-													onSave={(content) =>
-														saveMutation.mutate({
-															sectionKey: section.key,
-															content,
-														})
-													}
-													isSaving={saveMutation.isPending}
-												/>
+												{section.key === "whatWeDo" ? (
+													<div className="space-y-10">
+														<ProgramsManager
+															data={getSectionData(section.key)}
+															onSave={(programs) =>
+																saveMutation.mutate({
+																	sectionKey: section.key,
+																	content: {
+																		...getSectionData(section.key),
+																		programs,
+																	},
+																})
+															}
+															isSaving={saveMutation.isPending}
+														/>
+														<div className="pt-8 border-t border-gray-100">
+															<SectionEditor
+																key={section.key}
+																sectionKey={section.key}
+																data={(() => {
+																	const { programs: _p, ...rest } =
+																		getSectionData(section.key);
+																	return rest;
+																})()}
+																onSave={(content) =>
+																	saveMutation.mutate({
+																		sectionKey: section.key,
+																		content: {
+																			...content,
+																			programs:
+																				getSectionData(section.key).programs,
+																		},
+																	})
+																}
+																isSaving={saveMutation.isPending}
+															/>
+														</div>
+													</div>
+												) : (
+													<SectionEditor
+														key={section.key}
+														sectionKey={section.key}
+														data={getSectionData(section.key)}
+														onSave={(content) =>
+															saveMutation.mutate({
+																sectionKey: section.key,
+																content,
+															})
+														}
+														isSaving={saveMutation.isPending}
+													/>
+												)}
 											</div>
 										</div>
 									)}
