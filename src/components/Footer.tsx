@@ -28,6 +28,15 @@ export default function Footer({ content }: FooterProps) {
 								{navbar.logoSub?.slice(0, 2).toUpperCase() || "SO"}
 							</div>
 						)}
+						{content.branding?.footerLogo2 && (
+							<div className="h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-1 shadow-sm">
+								<img
+									src={content.branding?.footerLogo2}
+									className="h-full w-auto object-contain max-w-[180px]"
+									alt={navbar.logoText}
+								/>
+							</div>
+						)}
 						<div className="flex flex-col -space-y-1">
 							<span className="text-xl font-black tracking-tight">
 								{navbar.logoText}

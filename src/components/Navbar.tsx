@@ -11,6 +11,7 @@ interface NavbarProps {
 export default function Navbar({ content }: NavbarProps) {
 	const { links, logoText, logoSub, ctaOrange, ctaBlue } = content.navbar || {};
 	const headerLogo = content.branding?.headerLogo || content.navbar?.logoUrl;
+	const headerLogo2 = content.branding?.headerLogo2;
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const { scrollY } = useScroll();
@@ -56,6 +57,15 @@ export default function Navbar({ content }: NavbarProps) {
 					<div className="h-12 flex items-center justify-center overflow-hidden rounded-xl p-1">
 						<img
 							src={headerLogo}
+							className="h-full w-auto object-contain max-w-[180px]"
+							alt={logoText}
+						/>
+					</div>
+				)}
+				{headerLogo2 && (
+					<div className="h-12 flex items-center justify-center overflow-hidden rounded-xl p-1">
+						<img
+							src={headerLogo2}
 							className="h-full w-auto object-contain max-w-[180px]"
 							alt={logoText}
 						/>
