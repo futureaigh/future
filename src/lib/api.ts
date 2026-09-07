@@ -97,6 +97,18 @@ export async function fetchSubmissions(): Promise<ContactSubmission[]> {
 	return j(await fetch("/api/submissions"));
 }
 
+export async function updateSubmission(
+	id: string,
+	data: Partial<Pick<ContactSubmission, "is_read" | "archived">>,
+): Promise<ContactSubmission> {
+	return j(
+		await fetch(`/api/submissions/${id}`, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data),
+		}),
+	);
+}
 export async function createSubmission(data: any): Promise<void> {
 	await j(
 		await fetch("/api/submissions", {

@@ -12,6 +12,8 @@ export interface ContactSubmission {
   phone?: string;
   interest: 'attend_event' | 'volunteer' | 'scholarship' | 'financial_support' | 'partnership' | 'other';
   message?: string;
+  is_read: boolean;
+  archived: boolean;
   created_date: any;
 }
 
