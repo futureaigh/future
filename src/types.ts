@@ -20,3 +20,17 @@ export interface AdminUser {
   email: string;
   user_id: string;
 }
+
+export interface GalleryImage {
+  id: number;
+  s3_key: string;
+  url: string;
+  thumb_url: string;
+  caption: string;
+  sort_order: number;
+  visible: boolean;
+  width: number | null;
+  height: number | null;
+  bytes: number | null;
+  created_at: string;
+}

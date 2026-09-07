@@ -10,6 +10,7 @@ import Future from './pages/Future';
 import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import News from './pages/News';
+import Gallery from './pages/Gallery';
 import Admin from './pages/Admin';
 import SiteHead from './components/SiteHead';
 
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/news" element={<News />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </Router>

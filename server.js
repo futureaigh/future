@@ -3,10 +3,12 @@ import path from "path";
 import crypto from "crypto";
 import { fileURLToPath } from "url";
 import pg from "pg";
+import sharp from "sharp";
 import {
 	S3Client,
 	PutObjectCommand,
 	GetObjectCommand,
+	DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -63,6 +65,20 @@ async function initDb() {
       created_date TIMESTAMPTZ NOT NULL DEFAULT now()
     );
     ALTER TABLE submissions ADD COLUMN IF NOT EXISTS source TEXT;
+    CREATE TABLE IF NOT EXISTS gallery_images (
+      id BIGSERIAL PRIMARY KEY,
+      s3_key TEXT UNIQUE NOT NULL,
+      url TEXT NOT NULL,
+      caption TEXT NOT NULL DEFAULT '',
+      sort_order INT NOT NULL DEFAULT 0,
+      visible BOOLEAN NOT NULL DEFAULT TRUE,
+      width INT,
+      height INT,
+      bytes INT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+    ALTER TABLE gallery_images ADD COLUMN IF NOT EXISTS thumb_key TEXT;
+    ALTER TABLE gallery_images ADD COLUMN IF NOT EXISTS thumb_url TEXT;
   `);
 }
 
@@ -238,6 +254,210 @@ app.get("/media/:key(*)", async (req, res) => {
 		obj.Body.pipe(res);
 	} catch (e) {
 		res.status(404).end();
+	}
+});
+
+// ------------------------------------------------------------
+// Gallery (upload-only, S3-backed, optimized to WebP via sharp)
+// ------------------------------------------------------------
+const GALLERY_MAX_BYTES = 10 * 1024 * 1024;
+
+function isSupportedImage(buf) {
+	if (!buf || buf.length < 12) return false;
+	// JPEG
+	if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return true;
+	// PNG
+	if (
+		buf[0] === 0x89 &&
+		buf[1] === 0x50 &&
+		buf[2] === 0x4e &&
+		buf[3] === 0x47
+	)
+		return true;
+	// WebP (RIFF....WEBP)
+	if (
+		buf.toString("ascii", 0, 4) === "RIFF" &&
+		buf.toString("ascii", 8, 12) === "WEBP"
+	)
+		return true;
+	return false;
+}
+
+function galleryRow(r) {
+	return {
+		id: r.id,
+		s3_key: r.s3_key,
+		url: r.url,
+		thumb_url: r.thumb_url || r.url,
+		caption: r.caption,
+		sort_order: r.sort_order,
+		visible: r.visible,
+		width: r.width,
+		height: r.height,
+		bytes: r.bytes,
+		created_at: r.created_at,
+	};
+}
+
+app.get("/api/gallery", async (req, res) => {
+	try {
+		const includeHidden = req.query.include_hidden === "1";
+		if (includeHidden) {
+			// Reuse cookie auth inline (public route otherwise)
+			const raw = (req.headers.cookie || "")
+				.split(";")
+				.map((s) => s.trim())
+				.find((c) => c.startsWith(COOKIE + "="));
+			const token = raw ? raw.slice(COOKIE.length + 1) : "";
+			const [user, exp, sig] = token.split(".");
+			if (
+				!user ||
+				!exp ||
+				!sig ||
+				Date.now() > Number(exp) ||
+				sign(`${user}.${exp}`) !== sig
+			) {
+				return res.status(401).json({ ok: false });
+			}
+		}
+		const { rows } = await pool.query(
+			includeHidden
+				? "SELECT * FROM gallery_images ORDER BY sort_order ASC, created_at DESC"
+				: "SELECT * FROM gallery_images WHERE visible = TRUE ORDER BY sort_order ASC, created_at DESC",
+		);
+		res.json(rows.map(galleryRow));
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: "db" });
+	}
+});
+
+app.post(
+	"/api/gallery/upload",
+	auth,
+	express.raw({ type: () => true, limit: "15mb" }),
+	async (req, res) => {
+		const buf = req.body;
+		if (!Buffer.isBuffer(buf) || buf.length === 0)
+			return res.status(400).json({ error: "empty file" });
+		if (buf.length > GALLERY_MAX_BYTES)
+			return res.status(413).json({ error: "file too large (max 10MB)" });
+		if (!isSupportedImage(buf))
+			return res
+				.status(400)
+				.json({ error: "only JPEG, PNG or WebP uploads allowed" });
+		try {
+			// ponytail: AVIF full + WebP thumb only; add more widths when gallery page is slow
+			const { data, info } = await sharp(buf, {
+				limitInputPixels: 25_000_000,
+			})
+				.rotate()
+				.resize({ width: 1920, withoutEnlargement: true })
+				.avif({ quality: 65, effort: 4 })
+				.toBuffer({ resolveWithObject: true });
+			const thumb = await sharp(buf, { limitInputPixels: 25_000_000 })
+				.rotate()
+				.resize({ width: 400, withoutEnlargement: true })
+				.webp({ quality: 70, effort: 4 })
+				.toBuffer();
+			const base = `${Date.now()}-${crypto.randomUUID()}`;
+			const key = `gallery/${base}.avif`;
+			const thumbKey = `gallery/${base}-thumb.webp`;
+			await s3.send(
+				new PutObjectCommand({
+					Bucket: process.env.S3_BUCKET,
+					Key: key,
+					Body: data,
+					ContentType: "image/avif",
+				}),
+			);
+			await s3.send(
+				new PutObjectCommand({
+					Bucket: process.env.S3_BUCKET,
+					Key: thumbKey,
+					Body: thumb,
+					ContentType: "image/webp",
+				}),
+			);
+			const { rows } = await pool.query(
+				`INSERT INTO gallery_images (s3_key, thumb_key, url, thumb_url, width, height, bytes)
+         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+				[
+					key,
+					thumbKey,
+					`/media/${key}`,
+					`/media/${thumbKey}`,
+					info.width,
+					info.height,
+					data.length,
+				],
+			);
+			res.status(201).json(galleryRow(rows[0]));
+		} catch (e) {
+			console.error("Gallery upload error", e);
+			res.status(400).json({ error: "invalid or corrupt image" });
+		}
+	},
+);
+
+app.put("/api/gallery/:id", auth, async (req, res) => {
+	const { id } = req.params;
+	const { caption, sort_order, visible } = req.body || {};
+	const sets = [];
+	const vals = [];
+	if (typeof caption === "string") {
+		vals.push(caption.slice(0, 300));
+		sets.push(`caption = $${vals.length}`);
+	}
+	if (Number.isInteger(sort_order)) {
+		vals.push(sort_order);
+		sets.push(`sort_order = $${vals.length}`);
+	}
+	if (typeof visible === "boolean") {
+		vals.push(visible);
+		sets.push(`visible = $${vals.length}`);
+	}
+	if (!sets.length) return res.status(400).json({ error: "nothing to update" });
+	vals.push(id);
+	try {
+		const { rows } = await pool.query(
+			`UPDATE gallery_images SET ${sets.join(", ")} WHERE id = $${vals.length} RETURNING *`,
+			vals,
+		);
+		if (!rows.length) return res.status(404).json({ error: "not found" });
+		res.json(galleryRow(rows[0]));
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: "db" });
+	}
+});
+
+app.delete("/api/gallery/:id", auth, async (req, res) => {
+	try {
+		const { rows } = await pool.query(
+			"SELECT * FROM gallery_images WHERE id = $1",
+			[req.params.id],
+		);
+		if (!rows.length) return res.status(404).json({ error: "not found" });
+		for (const k of [rows[0].s3_key, rows[0].thumb_key].filter(Boolean)) {
+			try {
+				await s3.send(
+					new DeleteObjectCommand({
+						Bucket: process.env.S3_BUCKET,
+						Key: k,
+					}),
+				);
+			} catch (e) {
+				console.error("Gallery S3 delete error", e);
+			}
+		}
+		await pool.query("DELETE FROM gallery_images WHERE id = $1", [
+			req.params.id,
+		]);
+		res.json({ ok: true });
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: "db" });
 	}
 });
 

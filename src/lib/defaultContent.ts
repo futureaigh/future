@@ -27,6 +27,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				href: "/what-we-do",
 			},
 			{ label: "Our Impact", href: "/impact" },
+			{ label: "Gallery", href: "/gallery" },
 			{
 				label: "Our Future",
 				href: "/future",
@@ -603,8 +604,9 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 			"Safeguarding Concern",
 		],
 		email: "admin@ttccommission.org",
+		conferenceEmail: "Conference@ttccommission.org",
 		phones: [{ label: "Tel & WhatsApp", value: "+44 7437 927289" }],
-		website: "sogyconf.org",
+		website: "admin@sogyconf.org",
 		charityName: "Turn To Christ Crusade",
 		charityNumber: "1212685",
 	},

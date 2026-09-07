@@ -89,6 +89,12 @@ export default function Contact() {
 									{contact.website}
 								</span>
 							</div>
+							<div className="flex items-center gap-3">
+								<Mail className="w-4 h-4 text-blue-600" />
+								<span className="font-bold text-gray-700">
+									{contact.conferenceEmail}
+								</span>
+							</div>
 							<p className="text-sm text-gray-500 font-medium">
 								Registered charity: {contact.charityName} (Charity No.{" "}
 								{contact.charityNumber})
@@ -101,7 +107,7 @@ export default function Contact() {
 							<div className="space-y-4">
 								{(contact.phones || []).map((phone: any) => (
 									<div key={phone.value} className="flex items-start gap-3">
-										<div className="flex flex-col gap-2 mt-0.5">
+										<div className="flex gap-3 mt-1">
 											<Phone className="w-4 h-4 text-blue-600 flex-shrink-0" />
 											<FaWhatsapp className="w-4 h-4 text-green-600 flex-shrink-0" />
 										</div>

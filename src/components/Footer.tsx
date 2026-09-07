@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Twitter, Github, Linkedin, Mail, Phone, Heart } from "lucide-react";
+import { Mail, Phone, Heart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa6";
 
 interface FooterProps {
 	content: any;
@@ -40,16 +41,42 @@ export default function Footer({ content }: FooterProps) {
 						{shared.footerText}
 					</p>
 					<div className="flex items-center gap-4">
-						{[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
+						{[
+							{
+								Icon: FaFacebook,
+								name: "Facebook",
+								href: "https://www.facebook.com/profile.php?id=61552678809609",
+							},
+							{
+								Icon: FaYoutube,
+								name: "YouTube",
+								href: "https://youtube.com/@turntochristcommission?si=Qafb_fDqkPKl2Eog",
+							},
+							{
+								Icon: FaTiktok,
+								name: "TikTok",
+								href: "https://www.tiktok.com/@streets.of.gold.csogy?_r=1",
+							},
+						].map(({ Icon, name, href }) => (
 							<a
-								key={i}
-								href="#"
+								key={name}
+								href={href}
+								target="_blank"
+								rel="noopener noreferrer"
 								className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/10 transition-colors"
-								aria-label="Social link"
+								aria-label={name}
 							>
 								<Icon className="w-4 h-4 text-gray-400" />
 							</a>
 						))}
+						<a
+							href="https://www.sogyconf.org"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="mt-4 block text-sm text-gray-400 font-medium hover:text-white transition-colors"
+						>
+							www.sogyconf.org
+						</a>
 					</div>
 				</div>
 
@@ -63,6 +90,12 @@ export default function Footer({ content }: FooterProps) {
 							{contact.email}
 						</span>
 					</div>
+					<div className="flex items-center gap-3">
+						<Mail className="w-4 h-4 text-blue-500" />
+						<span className="text-sm font-bold text-gray-300">
+							{contact.conferenceEmail}
+						</span>
+					</div>
 				</div>
 
 				<div className="space-y-6">
@@ -72,7 +105,7 @@ export default function Footer({ content }: FooterProps) {
 					<div className="space-y-4">
 						{(contact.phones || []).map((phone: any) => (
 							<div key={phone.value} className="flex gap-3">
-								<div className="flex flex-col gap-2 mt-0.5">
+								<div className="flex gap-3 mt-1">
 									<Phone className="w-4 h-4 text-blue-500 flex-shrink-0" />
 									<FaWhatsapp className="w-4 h-4 text-green-500 flex-shrink-0" />
 								</div>
