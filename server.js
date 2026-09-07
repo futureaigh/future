@@ -65,6 +65,8 @@ async function initDb() {
       created_date TIMESTAMPTZ NOT NULL DEFAULT now()
     );
     ALTER TABLE submissions ADD COLUMN IF NOT EXISTS source TEXT;
+    ALTER TABLE submissions ADD COLUMN IF NOT EXISTS is_read BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE submissions ADD COLUMN IF NOT EXISTS archived BOOLEAN NOT NULL DEFAULT FALSE;
     CREATE TABLE IF NOT EXISTS gallery_images (
       id BIGSERIAL PRIMARY KEY,
       s3_key TEXT UNIQUE NOT NULL,
@@ -183,9 +185,36 @@ app.put("/api/content/:key", auth, async (req, res) => {
 app.get("/api/submissions", auth, async (req, res) => {
 	try {
 		const { rows } = await pool.query(
-			"SELECT id, name, email, phone, interest, source, message, created_date FROM submissions ORDER BY created_date DESC",
+			"SELECT id, name, email, phone, interest, source, message, is_read, archived, created_date FROM submissions ORDER BY created_date DESC",
 		);
 		res.json(rows);
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: "db" });
+	}
+});
+
+app.patch("/api/submissions/:id", auth, async (req, res) => {
+	const { is_read, archived } = req.body || {};
+	const sets = [];
+	const vals = [];
+	if (typeof is_read === "boolean") {
+		vals.push(is_read);
+		sets.push(`is_read = $${vals.length}`);
+	}
+	if (typeof archived === "boolean") {
+		vals.push(archived);
+		sets.push(`archived = $${vals.length}`);
+	}
+	if (!sets.length) return res.status(400).json({ error: "nothing to update" });
+	vals.push(req.params.id);
+	try {
+		const { rows } = await pool.query(
+			`UPDATE submissions SET ${sets.join(", ")} WHERE id = $${vals.length} RETURNING id, name, email, phone, interest, source, message, is_read, archived, created_date`,
+			vals,
+		);
+		if (!rows.length) return res.status(404).json({ error: "not found" });
+		res.json(rows[0]);
 	} catch (e) {
 		console.error(e);
 		res.status(500).json({ error: "db" });

@@ -55,7 +55,9 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	branding: {
 		favicon: "",
 		headerLogo: "",
+		headerLogo2: "",
 		footerLogo: "",
+		footerLogo2: "",
 		adminLogo: "",
 	},
 
