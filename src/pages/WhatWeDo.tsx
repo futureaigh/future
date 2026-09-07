@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useSiteContent } from "@/lib/useSiteContent";
 import { Helmet } from "react-helmet-async";
 
-const CATEGORIES: Record<string, string> = {
+export const CATEGORIES: Record<string, string> = {
 	conferences: "Conferences",
 	outreach: "School Outreach",
 	mentorship: "Mentorship & Leadership",
