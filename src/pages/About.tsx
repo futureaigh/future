@@ -49,10 +49,10 @@ export default function About() {
 				/>
 			</Helmet>
 
-			<PageHeader
+		<PageHeader
 				title="About Us"
 				subtitle={about.whoWeAre.title}
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={about.heroImage || undefined}
 			/>
 
 			{/* Who We Are */}

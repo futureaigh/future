@@ -31,7 +31,7 @@ export default function WhatWeDo() {
 			<PageHeader
 				title={whatWeDo.intro.title}
 				subtitle={whatWeDo.intro.text}
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={whatWeDo.heroImage || undefined}
 			/>
 
 			<Section className="bg-white">

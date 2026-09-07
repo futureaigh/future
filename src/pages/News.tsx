@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 
 export default function News() {
 	const { content } = useSiteContent();
+	const news = content.news ?? {};
 
 	return (
 		<SiteLayout contentOverride={content}>
@@ -22,7 +23,7 @@ export default function News() {
 			<PageHeader
 				title="News & Events"
 				subtitle="Updates from TTC & SOGY. Conferences, outreach and announcements are coming soon."
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={news.heroImage || undefined}
 			/>
 
 			<Section className="bg-white">

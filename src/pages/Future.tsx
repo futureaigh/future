@@ -27,10 +27,10 @@ export default function Future() {
 				/>
 			</Helmet>
 
-			<PageHeader
+		<PageHeader
 				title="Our Future"
 				subtitle="From periodic high-impact events to a year-round youth development ecosystem."
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={future.heroImage || undefined}
 			/>
 
 			{/* TTC Global Institute */}

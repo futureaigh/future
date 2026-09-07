@@ -31,10 +31,10 @@ export default function Impact() {
 				/>
 			</Helmet>
 
-			<PageHeader
+		<PageHeader
 				title={impact.intro.title}
 				subtitle={impact.intro.text}
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={impact.heroImage || undefined}
 			/>
 
 			{/* Impact highlights */}

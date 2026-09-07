@@ -11,6 +11,7 @@ import type { GalleryImage } from "@/types";
 
 export default function Gallery() {
 	const { content } = useSiteContent();
+	const galleryContent = content.gallery ?? {};
 	const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
 
 	const { data: images = [], isLoading } = useQuery({
@@ -31,6 +32,7 @@ export default function Gallery() {
 			<PageHeader
 				title="Gallery"
 				subtitle="Moments from our events, outreach and community."
+				imageUrl={galleryContent.heroImage || undefined}
 			/>
 
 			<Section className="bg-white">

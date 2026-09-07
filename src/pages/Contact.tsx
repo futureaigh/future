@@ -62,10 +62,10 @@ export default function Contact() {
 				/>
 			</Helmet>
 
-			<PageHeader
+		<PageHeader
 				title={contact.title}
 				subtitle={contact.subtitle}
-				imageUrl={"/media/site-content/1787955708700-group.jpg"}
+				imageUrl={contact.heroImage || undefined}
 			/>
 
 			<Section className="bg-white">

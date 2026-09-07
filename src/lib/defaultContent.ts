@@ -151,6 +151,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// ABOUT
 	// --------------------------------------------------------------------
 	about: {
+		heroImage: "",
 		whoWeAre: {
 			title: "Who We Are",
 			text: "Turn To Christ Commission and Streets of Gold Youth Conference, known collectively as TTC & SOGY, is a Christian youth empowerment and development movement operating under Turn To Christ Crusade, a Charitable Incorporated Organisation registered in England and Wales with charity number 1212685.\n\nWe combine Christian faith and discipleship with holistic youth development. Our work addresses the whole person: spiritual formation, academic growth, health and wellbeing, leadership, employability, entrepreneurship, financial capability, responsible citizenship and future-ready skills. Our programmes are welcoming, compassionate and internationally inclusive.",
@@ -306,6 +307,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// WHAT WE DO
 	// --------------------------------------------------------------------
 	whatWeDo: {
+		heroImage: "",
 		intro: {
 			title: "What We Do",
 			text: "We run a range of programmes and projects that bring Christian faith and practical development together in the lives of young people.",
@@ -425,6 +427,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// IMPACT
 	// --------------------------------------------------------------------
 	impact: {
+		heroImage: "",
 		intro: {
 			title: "Our Impact",
 			text: "Since the public launch of our programmes in 2022, we report reaching more than 13,000 young people in Ghana and the United Kingdom through outreach, conferences, mentorship, teaching and youth development activities.",
@@ -480,6 +483,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// FUTURE
 	// --------------------------------------------------------------------
 	future: {
+		heroImage: "",
 		institute: {
 			title: "TTC Global Institute",
 			text: "Our medium-term ambition is to establish TTC Global Institute: a Christian, non-denominational and internationally accessible learning institution dedicated to leadership, enterprise, character, technology and holistic human development.",
@@ -539,6 +543,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// GET INVOLVED
 	// --------------------------------------------------------------------
 	getInvolved: {
+		heroImage: "",
 		donate: {
 			title: "Support Our Work",
 			text: "Every donation contributes to the delivery and development of youth-focused activities. Depending on current priorities, support may help fund school and community outreach, youth conferences, training materials, mentorship, technology and programme quality.",
@@ -593,6 +598,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 	// CONTACT + FAQ
 	// --------------------------------------------------------------------
 	contact: {
+		heroImage: "",
 		title: "Let Us Build the Future Together",
 		subtitle:
 			"We would be delighted to hear from young people, parents, schools, churches, community organisations, volunteers, donors, corporate partners and institutions that share our passion for youth transformation.",
@@ -667,5 +673,13 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 		footerText:
 			"We invest in the whole young person: spirit, mind, character and potential. TTC & SOGY helps young people move from vulnerability and limited opportunity towards purpose, confidence, leadership and positive social impact.",
 		charityNumber: "1212685",
+	},
+
+	news: {
+		heroImage: "",
+	},
+
+	gallery: {
+		heroImage: "",
 	},
 };
