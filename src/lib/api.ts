@@ -1,4 +1,4 @@
-import type { SiteContentRecord, ContactSubmission } from "@/types";
+import type { SiteContentRecord, ContactSubmission, GalleryImage } from "@/types";
 
 async function j<T>(res: Response): Promise<T> {
 	if (!res.ok) {
@@ -118,4 +118,37 @@ export async function uploadImage(file: File): Promise<string> {
 	});
 	const data = await j<{ url: string }>(res);
 	return data.url;
+}
+
+// ------------------------------------------------------------
+// Gallery (upload-only; no link imports)
+// ------------------------------------------------------------
+export async function fetchGallery(includeHidden = false): Promise<GalleryImage[]> {
+	return j(await fetch(`/api/gallery${includeHidden ? "?include_hidden=1" : ""}`));
+}
+
+export async function uploadGalleryImage(file: File): Promise<GalleryImage> {
+	const res = await fetch("/api/gallery/upload", {
+		method: "POST",
+		headers: { "Content-Type": file.type || "application/octet-stream" },
+		body: file,
+	});
+	return j(res);
+}
+
+export async function updateGalleryImage(
+	id: number,
+	data: Partial<Pick<GalleryImage, "caption" | "sort_order" | "visible">>,
+): Promise<GalleryImage> {
+	return j(
+		await fetch(`/api/gallery/${id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data),
+		}),
+	);
+}
+
+export async function deleteGalleryImage(id: number): Promise<void> {
+	await j(await fetch(`/api/gallery/${id}`, { method: "DELETE" }));
 }

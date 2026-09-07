@@ -27,6 +27,7 @@ export const DEFAULT_CONTENT: Record<string, any> = {
 				href: "/what-we-do",
 			},
 			{ label: "Our Impact", href: "/impact" },
+			{ label: "Gallery", href: "/gallery" },
 			{
 				label: "Our Future",
 				href: "/future",

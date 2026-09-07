@@ -35,6 +35,7 @@ import {
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
 import { cn } from "@/lib/utils";
 import SectionEditor from "@/components/admin/SectionEditor";
+import GalleryManager from "@/components/admin/GalleryManager";
 import { toast } from "sonner";
 
 const INTEREST_LABELS = {
@@ -301,6 +302,17 @@ export default function Admin() {
 							<Settings className="w-4 h-4" /> Content
 						</button>
 						<button
+							onClick={() => setTab("gallery")}
+							className={cn(
+								"flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl transition-all",
+								tab === "gallery"
+									? "bg-white text-gray-900 shadow-sm"
+									: "text-gray-500 hover:text-gray-700",
+							)}
+						>
+							<Image className="w-4 h-4" /> Gallery
+						</button>
+						<button
 							onClick={() => setTab("submissions")}
 							className={cn(
 								"flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl transition-all",
@@ -338,6 +350,8 @@ export default function Admin() {
 			</div>
 
 			<div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+				{tab === "gallery" && <GalleryManager />}
+
 				{tab === "submissions" && (
 					<div className="space-y-8 animate-in fade-in duration-500">
 						<div>
