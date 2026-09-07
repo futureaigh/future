@@ -77,6 +77,8 @@ async function initDb() {
       bytes INT,
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
+    ALTER TABLE gallery_images ADD COLUMN IF NOT EXISTS thumb_key TEXT;
+    ALTER TABLE gallery_images ADD COLUMN IF NOT EXISTS thumb_url TEXT;
   `);
 }
 
@@ -286,6 +288,7 @@ function galleryRow(r) {
 		id: r.id,
 		s3_key: r.s3_key,
 		url: r.url,
+		thumb_url: r.thumb_url || r.url,
 		caption: r.caption,
 		sort_order: r.sort_order,
 		visible: r.visible,
@@ -344,27 +347,50 @@ app.post(
 				.status(400)
 				.json({ error: "only JPEG, PNG or WebP uploads allowed" });
 		try {
-			// ponytail: single fixed WebP profile; add thumb variant when gallery page is slow
+			// ponytail: AVIF full + WebP thumb only; add more widths when gallery page is slow
 			const { data, info } = await sharp(buf, {
 				limitInputPixels: 25_000_000,
 			})
 				.rotate()
 				.resize({ width: 1920, withoutEnlargement: true })
-				.webp({ quality: 80, effort: 4 })
+				.avif({ quality: 65, effort: 4 })
 				.toBuffer({ resolveWithObject: true });
-			const key = `gallery/${Date.now()}-${crypto.randomUUID()}.webp`;
+			const thumb = await sharp(buf, { limitInputPixels: 25_000_000 })
+				.rotate()
+				.resize({ width: 400, withoutEnlargement: true })
+				.webp({ quality: 70, effort: 4 })
+				.toBuffer();
+			const base = `${Date.now()}-${crypto.randomUUID()}`;
+			const key = `gallery/${base}.avif`;
+			const thumbKey = `gallery/${base}-thumb.webp`;
 			await s3.send(
 				new PutObjectCommand({
 					Bucket: process.env.S3_BUCKET,
 					Key: key,
 					Body: data,
+					ContentType: "image/avif",
+				}),
+			);
+			await s3.send(
+				new PutObjectCommand({
+					Bucket: process.env.S3_BUCKET,
+					Key: thumbKey,
+					Body: thumb,
 					ContentType: "image/webp",
 				}),
 			);
 			const { rows } = await pool.query(
-				`INSERT INTO gallery_images (s3_key, url, width, height, bytes)
-         VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-				[key, `/media/${key}`, info.width, info.height, data.length],
+				`INSERT INTO gallery_images (s3_key, thumb_key, url, thumb_url, width, height, bytes)
+         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+				[
+					key,
+					thumbKey,
+					`/media/${key}`,
+					`/media/${thumbKey}`,
+					info.width,
+					info.height,
+					data.length,
+				],
 			);
 			res.status(201).json(galleryRow(rows[0]));
 		} catch (e) {
@@ -413,15 +439,17 @@ app.delete("/api/gallery/:id", auth, async (req, res) => {
 			[req.params.id],
 		);
 		if (!rows.length) return res.status(404).json({ error: "not found" });
-		try {
-			await s3.send(
-				new DeleteObjectCommand({
-					Bucket: process.env.S3_BUCKET,
-					Key: rows[0].s3_key,
-				}),
-			);
-		} catch (e) {
-			console.error("Gallery S3 delete error", e);
+		for (const k of [rows[0].s3_key, rows[0].thumb_key].filter(Boolean)) {
+			try {
+				await s3.send(
+					new DeleteObjectCommand({
+						Bucket: process.env.S3_BUCKET,
+						Key: k,
+					}),
+				);
+			} catch (e) {
+				console.error("Gallery S3 delete error", e);
+			}
 		}
 		await pool.query("DELETE FROM gallery_images WHERE id = $1", [
 			req.params.id,

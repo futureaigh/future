@@ -7,10 +7,11 @@ import PageHeader from "@/components/PageHeader";
 import { Section, Container } from "@/components/ui/Button";
 import { useSiteContent } from "@/lib/useSiteContent";
 import { fetchGallery } from "@/lib/api";
+import type { GalleryImage } from "@/types";
 
 export default function Gallery() {
 	const { content } = useSiteContent();
-	const [lightbox, setLightbox] = useState<string | null>(null);
+	const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
 
 	const { data: images = [], isLoading } = useQuery({
 		queryKey: ["gallery"],
@@ -58,11 +59,11 @@ export default function Gallery() {
 							{images.map((img) => (
 								<button
 									key={img.id}
-									onClick={() => setLightbox(img.url)}
+									onClick={() => setLightbox(img)}
 									className="block w-full break-inside-avoid rounded-2xl overflow-hidden group text-left"
 								>
 									<img
-										src={img.url}
+										src={img.thumb_url || img.url}
 										alt={img.caption || "Gallery photo"}
 										loading="lazy"
 										className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
@@ -84,11 +85,15 @@ export default function Gallery() {
 					className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-4"
 					onClick={() => setLightbox(null)}
 				>
-					<img
-						src={lightbox}
-						alt=""
-						className="max-w-full max-h-[90vh] rounded-xl object-contain"
-					/>
+					{/* ponytail: AVIF with thumb fallback; pre-AVIF browsers get the 400px thumb */}
+					<picture>
+						<source srcSet={lightbox.url} type="image/avif" />
+						<img
+							src={lightbox.thumb_url || lightbox.url}
+							alt={lightbox.caption || ""}
+							className="max-w-full max-h-[90vh] rounded-xl object-contain"
+						/>
+					</picture>
 				</div>
 			)}
 		</SiteLayout>

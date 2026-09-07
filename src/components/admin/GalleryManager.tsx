@@ -16,6 +16,7 @@ const ACCEPT = "image/jpeg,image/png,image/webp";
 export default function GalleryManager() {
 	const queryClient = useQueryClient();
 	const inputRef = useRef<HTMLInputElement>(null);
+	const dragId = useRef<number | null>(null);
 	const [uploading, setUploading] = useState(0);
 
 	const { data: images = [], isLoading } = useQuery({
@@ -46,6 +47,30 @@ export default function GalleryManager() {
 		},
 		onError: () => toast.error("Delete failed"),
 	});
+
+	// ponytail: native HTML5 drag, no dnd lib; switch when touch-reorder is needed
+	function move(draggedId: number, targetId: number) {
+		if (draggedId === targetId) return;
+		const order = [...images];
+		const from = order.findIndex((i) => i.id === draggedId);
+		const to = order.findIndex((i) => i.id === targetId);
+		if (from < 0 || to < 0) return;
+		const [m] = order.splice(from, 1);
+		order.splice(to, 0, m);
+		queryClient.setQueryData(["gallery-admin"], order);
+		Promise.all(
+			order.map((img, idx) =>
+				idx === img.sort_order
+					? null
+					: updateGalleryImage(img.id, { sort_order: idx }),
+			),
+		)
+			.then(() => invalidate())
+			.catch(() => {
+				invalidate();
+				toast.error("Reorder failed");
+			});
+	}
 
 	async function handleFiles(files: FileList | null) {
 		if (!files?.length) return;
@@ -81,8 +106,8 @@ export default function GalleryManager() {
 					Gallery
 				</h1>
 				<p className="text-sm text-gray-500 mt-2">
-					Upload photos (JPEG, PNG, WebP — max 10MB). Stored in S3 and
-					auto-compressed to WebP.
+					Upload photos (JPEG, PNG, WebP — max 10MB). Stored in S3 as AVIF
+					with a WebP thumbnail. Drag cards to reorder.
 				</p>
 			</div>
 
@@ -114,17 +139,24 @@ export default function GalleryManager() {
 					{images.map((img) => (
 						<div
 							key={img.id}
+							draggable
+							onDragStart={() => (dragId.current = img.id)}
+							onDragOver={(e) => e.preventDefault()}
+							onDrop={() =>
+								dragId.current !== null && move(dragId.current, img.id)
+							}
 							className={cn(
-								"bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm",
+								"bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm cursor-move",
 								!img.visible && "opacity-60",
 							)}
 						>
 							<div className="aspect-square bg-gray-50">
 								<img
-									src={img.url}
+									src={img.thumb_url || img.url}
 									alt={img.caption || "Gallery image"}
-									className="w-full h-full object-cover"
+									className="w-full h-full object-cover pointer-events-none"
 									loading="lazy"
+									draggable={false}
 								/>
 							</div>
 							<div className="p-3 space-y-2">
