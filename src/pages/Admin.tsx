@@ -12,6 +12,9 @@ import {
 	PanelTop,
 	Image,
 	Search,
+	MailOpen,
+	Archive,
+	ArchiveRestore,
 	Home,
 	Info,
 	Target,
@@ -31,11 +34,13 @@ import {
 	fetchContent,
 	saveContent,
 	fetchSubmissions,
+	updateSubmission,
 } from "@/lib/api";
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
 import { cn } from "@/lib/utils";
 import SectionEditor from "@/components/admin/SectionEditor";
 import GalleryManager from "@/components/admin/GalleryManager";
+import type { ContactSubmission } from "@/types";
 import { toast } from "sonner";
 
 const INTEREST_LABELS = {
@@ -144,6 +149,44 @@ export default function Admin() {
 		if (record) return { ...(DEFAULT_CONTENT as any)[key], ...record.content };
 		return (DEFAULT_CONTENT as any)[key] || {};
 	};
+
+	const [enqView, setEnqView] = useState<"active" | "archived">("active");
+	const [enqSort, setEnqSort] = useState<"newest" | "oldest" | "unread">(
+		"newest",
+	);
+
+	const triageMutation = useMutation({
+		mutationFn: ({
+			id,
+			data,
+		}: {
+			id: string;
+			data: Partial<Pick<ContactSubmission, "is_read" | "archived">>;
+		}) => updateSubmission(id, data),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["contact-submissions"] });
+		},
+		onError: () => toast.error("Update failed"),
+	});
+
+	const unreadCount = submissions.filter((s) => !s.archived && !s.is_read).length;
+	const visibleSubmissions = submissions
+		.filter((s) => (enqView === "archived" ? s.archived : !s.archived))
+		.sort((a, b) => {
+			if (enqSort === "oldest")
+				return (
+					new Date(a.created_date).getTime() - new Date(b.created_date).getTime()
+				);
+			if (enqSort === "unread") {
+				const r =
+					(a.is_read ? 1 : 0) - (b.is_read ? 1 : 0) ||
+					new Date(b.created_date).getTime() - new Date(a.created_date).getTime();
+				return r;
+			}
+			return (
+				new Date(b.created_date).getTime() - new Date(a.created_date).getTime()
+			);
+		});
 
 	if (authLoading || (user && isAdmin && contentLoading)) {
 		return (
@@ -322,9 +365,9 @@ export default function Admin() {
 							)}
 						>
 							<Inbox className="w-4 h-4" /> Enquiries
-							{submissions.length > 0 && (
+							{unreadCount > 0 && (
 								<span className="bg-blue-600 text-white text-[10px] px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
-									{submissions.length}
+									{unreadCount}
 								</span>
 							)}
 						</button>
@@ -354,34 +397,74 @@ export default function Admin() {
 
 				{tab === "submissions" && (
 					<div className="space-y-8 animate-in fade-in duration-500">
-						<div>
-							<h1 className="text-3xl font-black text-gray-900 tracking-tight">
-								Active Enquiries
-							</h1>
-							<p className="text-sm text-gray-500 mt-2">
-								Incoming messages from the website 'Get Involved' form.
-							</p>
+						<div className="flex flex-wrap items-end justify-between gap-4">
+							<div>
+								<h1 className="text-3xl font-black text-gray-900 tracking-tight">
+									{enqView === "archived" ? "Archived" : "Active Enquiries"}
+								</h1>
+								<p className="text-sm text-gray-500 mt-2">
+									Incoming messages from the website 'Get Involved' form.
+								</p>
+							</div>
+							<div className="flex items-center gap-2">
+								<div className="flex items-center gap-1 p-1 bg-gray-100 rounded-xl">
+									{(["active", "archived"] as const).map((v) => (
+										<button
+											key={v}
+											onClick={() => setEnqView(v)}
+											className={cn(
+												"text-xs font-bold px-3 py-2 rounded-lg transition-all capitalize",
+												enqView === v
+													? "bg-white text-gray-900 shadow-sm"
+													: "text-gray-500 hover:text-gray-700",
+											)}
+										>
+											{v}
+										</button>
+									))}
+								</div>
+								<select
+									value={enqSort}
+									onChange={(e) => setEnqSort(e.target.value as any)}
+									className="text-xs font-bold px-3 py-2.5 bg-gray-100 rounded-xl text-gray-600 focus:outline-none cursor-pointer"
+									aria-label="Sort messages"
+								>
+									<option value="newest">Newest first</option>
+									<option value="oldest">Oldest first</option>
+									<option value="unread">Unread first</option>
+								</select>
+							</div>
 						</div>
 
-						{submissions.length === 0 ? (
+						{visibleSubmissions.length === 0 ? (
 							<div className="bg-white border border-dashed border-gray-200 rounded-3xl py-20 text-center space-y-4">
 								<div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
 									<Inbox className="w-6 h-6 text-gray-300" />
 								</div>
 								<p className="text-gray-400 font-medium">
-									No submissions to display yet.
+									{enqView === "archived"
+										? "No archived messages."
+										: "No submissions to display yet."}
 								</p>
 							</div>
 						) : (
 							<div className="grid gap-4">
-								{submissions.map((s) => (
+								{visibleSubmissions.map((s) => (
 									<div
 										key={s.id}
-										className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all"
+										className={cn(
+											"bg-white rounded-2xl border p-6 shadow-sm hover:shadow-md transition-all",
+											!s.is_read && !s.archived
+												? "border-blue-200"
+												: "border-gray-100",
+										)}
 									>
 										<div className="flex flex-wrap items-start justify-between gap-4 mb-4">
 											<div className="space-y-1">
 												<div className="flex items-center gap-2">
+													{!s.is_read && !s.archived && (
+														<span className="w-2 h-2 rounded-full bg-blue-600" />
+													)}
 													<h3 className="font-black text-gray-900">{s.name}</h3>
 													<span className="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
 														{INTEREST_LABELS[s.interest] || s.interest}
@@ -406,12 +489,48 @@ export default function Admin() {
 											</span>
 										</div>
 										{s.message && (
-											<div className="bg-gray-50 p-4 rounded-xl">
+											<div className="bg-gray-50 p-4 rounded-xl mb-4">
 												<p className="text-sm text-gray-600 leading-relaxed italic">
 													"{s.message}"
 												</p>
 											</div>
 										)}
+										<div className="flex flex-wrap items-center gap-2">
+											<button
+												onClick={() =>
+													triageMutation.mutate({
+														id: s.id,
+														data: { is_read: !s.is_read },
+													})
+												}
+												className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-bold text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+											>
+												<MailOpen className="w-3.5 h-3.5" />
+												{s.is_read ? "Mark unread" : "Mark read"}
+											</button>
+											<button
+												onClick={() =>
+													triageMutation.mutate({
+														id: s.id,
+														data: {
+															archived: !s.archived,
+															is_read: true,
+														},
+													})
+												}
+												className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-bold text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-all"
+											>
+												{s.archived ? (
+													<>
+														<ArchiveRestore className="w-3.5 h-3.5" /> Unarchive
+													</>
+												) : (
+													<>
+														<Archive className="w-3.5 h-3.5" /> Archive
+													</>
+												)}
+											</button>
+										</div>
 									</div>
 								))}
 							</div>
