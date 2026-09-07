@@ -74,11 +74,18 @@ export default function GalleryManager() {
 
 	async function handleFiles(files: FileList | null) {
 		if (!files?.length) return;
-		const list = [...files].filter((f) =>
-			["image/jpeg", "image/png", "image/webp"].includes(f.type),
+		const tooBig = [...files].filter((f) => f.size > 10 * 1024 * 1024);
+		if (tooBig.length)
+			toast.error(
+				`Too large (max 10MB): ${tooBig.map((f) => f.name).join(", ")}`,
+			);
+		const list = [...files].filter(
+			(f) =>
+				["image/jpeg", "image/png", "image/webp"].includes(f.type) &&
+				f.size <= 10 * 1024 * 1024,
 		);
-		if (list.length !== files.length)
-			toast.error("Only JPEG, PNG or WebP files allowed");
+		if (list.length !== files.length - tooBig.length)
+			toast.error("Skipped: only JPEG, PNG or WebP files allowed");
 		if (!list.length) return;
 		setUploading(list.length);
 		let done = 0;
@@ -86,8 +93,10 @@ export default function GalleryManager() {
 			try {
 				await uploadGalleryImage(file);
 				done++;
-			} catch {
-				toast.error(`Upload failed: ${file.name}`);
+			} catch (e) {
+				toast.error(
+					`Upload failed: ${file.name} (${e instanceof Error ? e.message : "unknown error"})`,
+				);
 			}
 		}
 		setUploading(0);
