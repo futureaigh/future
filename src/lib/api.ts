@@ -145,7 +145,17 @@ export async function uploadGalleryImage(file: File): Promise<GalleryImage> {
 		headers: { "Content-Type": file.type || "application/octet-stream" },
 		body: file,
 	});
-	return j(res);
+	if (!res.ok) {
+		let reason = `HTTP ${res.status}`;
+		try {
+			const body = await res.json();
+			if (body?.error) reason = body.error;
+		} catch {
+			/* non-JSON error (e.g. body limit) */
+		}
+		throw new Error(reason);
+	}
+	return res.json() as Promise<GalleryImage>;
 }
 
 export async function updateGalleryImage(
